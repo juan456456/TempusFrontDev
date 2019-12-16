@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'calidadweb';
+  public loginstatus  = localStorage.getItem("loginstatus");
+ 
 }

@@ -15,6 +15,11 @@ export class GeneralService {
     return JSON.parse(localStorage.getItem("logindata"));
   }
 
+   
+  public static get LOGIN_URL(): String {
+    return "http://159.203.175.212/loginws/public/ws/";
+  }
+
   constructor(
     private spinner: NgxSpinnerService
   ) { }

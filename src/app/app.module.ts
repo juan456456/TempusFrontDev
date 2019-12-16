@@ -26,6 +26,8 @@ import { ReporteComponent } from './reporte/reporte.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { AgregarHoraComponent } from './hora/agregar-hora/agregar-hora.component'; // for FullCalendar!
 import { DatePipe } from '@angular/common';
+import { ClaveComponent } from './clave/clave.component';
+
 
 
 
@@ -35,6 +37,9 @@ import { ActividadService } from '../services/actividad.service';
 import { ProjectService } from '../services/project.service';
 import { ProjectDetailService } from '../services/projectdetail.service';
 import { RegHoraService } from '../services/reghora.service';
+import { UsuarioService } from 'src/services/usuario.service';
+import { LoginService } from '../services/login.service';
+
 
 
 @NgModule({
@@ -49,6 +54,7 @@ import { RegHoraService } from '../services/reghora.service';
     HoraComponent,
     ReporteComponent,
     AgregarHoraComponent,
+    ClaveComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +74,10 @@ import { RegHoraService } from '../services/reghora.service';
     ActividadService,
     ProjectService,
     ProjectDetailService,
-    RegHoraService
+    RegHoraService,
+    LoginService,
+    UsuarioService
+
   ],
   bootstrap: [AppComponent]
 })

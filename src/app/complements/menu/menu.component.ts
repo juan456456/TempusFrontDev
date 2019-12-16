@@ -8,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
 
   constructor() { }
-
-  ngOnInit() {
+  public data : any = [];
+  ngOnInit()
+  {
+    this.data = JSON.parse(localStorage.getItem("logindata"));
   }
 
 }

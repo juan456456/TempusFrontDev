@@ -1,0 +1,43 @@
+<p>
+  clave works!
+</p>
+<div class="uk-section-small uk-section-default header">
+    <div class="uk-container uk-container-large">
+      <h1><span class="ion-speedometer"></span> Modificar contraseña</h1>
+      <ul class="uk-breadcrumb">
+        <li><a routerLink="">Inicio</a></li>
+        <li><span>Modificar contraseña</span></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="uk-section-small">
+    <div class="uk-container uk-container-large">
+      <div>
+  
+        <div class="uk-card uk-card-default uk-card-body">
+  
+          <form class="uk-grid-small" uk-grid [formGroup]="data" (ngSubmit)="actualizar()">
+  
+            <div class="uk-width-1-1@s">
+              <label class="uk-form-label" for="form-stacked-text">Nueva contraseña</label>
+              <input class="uk-input" type="text" formControlName="clave" />
+            </div>
+  
+            <div class="uk-width-1-1@s">
+              <label class="uk-form-label" for="form-stacked-text">Repetir contraseña</label>
+              <input class="uk-input" type="text" formControlName="rclave" />
+            </div>
+  
+            <div class="uk-width-1-1@s uk-flex uk-flex-center">
+              <button class="uk-button uk-button-primary submitbutton" type="submit" [disabled]="!data.valid">
+                Editar
+              </button>
+            </div>
+  
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  </div>

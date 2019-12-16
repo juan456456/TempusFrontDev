@@ -1,7 +1,10 @@
-<!DOCTYPE html>
-<html>
+<html *ngIf="loginstatus == 'false' || loginstatus == null">
+    <app-login></app-login>
+</html>
+
+ <html *ngIf="loginstatus == 'true'">
     <head>
-        <title>Title</title>
+        <title>PRUEBA</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
@@ -15,4 +18,3 @@
         <app-footer></app-footer>
     </body>
 </html>
-
