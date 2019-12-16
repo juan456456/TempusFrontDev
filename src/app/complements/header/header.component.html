@@ -1,0 +1,33 @@
+<div uk-sticky class="uk-navbar-container tm-navbar-container uk-active">
+  <div class="uk-container uk-container-expand uk-float">
+    <nav uk-navbar>
+      <div class="uk-navbar-left uk-border">
+        <a id="sidebar_toggle" class="uk-navbar-toggle" uk-navbar-toggle-icon></a>
+        <a routerLink="" class="uk-navbar-item uk-logo">
+          <img src="/assets/simbolo.png">
+          <img src="/assets/logo_nec_3.png">
+          <img src="/assets/logo_letsgonec_2.png" style="margin-left: 400px">
+        </a>
+      </div>
+      <div class="uk-navbar-right uk-light">
+        <ul class="uk-navbar-nav">
+          <li class="uk-active">
+            <a href="#">
+              <h3 style="color: #222; margin-top: 10px">Martin  </h3>
+              <span uk-icon="chevron-down"></span>
+            </a>
+            <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
+              <ul class="uk-nav uk-navbar-dropdown-nav">
+                <li class="uk-nav-header">Options</li>
+                <li><a href="#">Edit Profile</a></li>
+                <li class="uk-nav-header">Actions</li>
+                <li><a href="#">Lock</a></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

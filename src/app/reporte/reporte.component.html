@@ -1,0 +1,76 @@
+<div class="uk-section-small uk-section-default header">
+    <div class="uk-container uk-container-large">
+        <h1><span class="ion-speedometer"></span> Mi reporte de horas </h1>
+        <ul class="uk-breadcrumb">
+            <li><a href="">Inicio</a></li>
+            <li><span href="">Resportes</span></li>
+        </ul>
+    </div>
+</div>
+
+<div class="uk-section-small uk-section-default header">
+    <div class="uk-container uk-container-large">
+        <div uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <h3>Lista de Horas</h3>
+            <p>Aquí aparece todas las horas registradas, las cuales pueden ser filtradas por fecha de registro.
+            </p>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="caption font-dark">
+            <span uk-icon="icon: cog"></span>
+            <span class="uk-label uk-label-success">Horas</span>
+        </div>
+
+        <form style="text-align: center" class="uk-grid-small" uk-grid [formGroup]="formulario">
+
+            <div class="uk-width-1-3@s">
+                <label class="uk-form-label" for="form-stacked-text">Fecha inicial</label>
+                <div class="uk-margin">
+                    <div class="uk-inline width-100">
+                        <a class="uk-form-icon" uk-icon="icon: calendar"></a>
+                        <input class="uk-input" type="date" formControlName="fecha_inicial" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-width-1-3@s">
+                <label class="uk-form-label" for="form-stacked-text">Fecha final</label>
+                <div class="uk-margin">
+                    <div class="uk-inline width-100">
+                        <a class="uk-form-icon" uk-icon="icon: calendar"></a>
+                        <input class="uk-input" type="date" formControlName="fecha_final" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="uk-overflow-auto" style="padding: 30px">
+        <table class="uk-table uk-table-small uk-table-divider">
+            <tbody>
+                <tr>
+                    <th>Colaborador</th>
+                    <th>Pais</th>
+                    <th>Actividad</th>
+                    <th>Actividad Sec</th>
+                    <th>WBS</th>
+                    <th>Fecha reg</th>
+                    <th>Fecha ini</th>
+                    <th>Cant horas</th>
+                    <th>Autorizado</th>
+                    <th>Motivo rechazo</th>
+                    <th>Usuario que aprueba</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+
+                <tr *ngFor="let reportes of reporte">
+                    <td>{{reportes.idusuario}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

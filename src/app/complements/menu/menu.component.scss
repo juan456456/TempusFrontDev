@@ -1,0 +1,22 @@
+    .uk-nav-item{
+        list-style-type: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .uk-nav-default>li>a {
+        color: #aeb2b7 !important;
+        text-decoration: none;
+        display: block;
+        padding: 10px 0 10px 15px;
+        font-size: 12px;
+        outline: 0;
+        -webkit-transition: all 200ms ease-in;
+        -moz-transition: all 200ms ease-in;
+        -o-transition: all 200ms ease-in;
+        -ms-transition: all 200ms ease-in;
+        transition: all 200ms ease-in;
+    }
+    .uk-nav-default>li>a:hover{
+        background: rgba(204, 202, 202, 0.4117647058823529);
+        color: #607D8B !important;
+    }

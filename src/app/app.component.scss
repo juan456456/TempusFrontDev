@@ -1,0 +1,73 @@
+:host ::ng-deep{
+.user{
+    text-align:center;
+    padding-bottom: 20px;
+}
+
+
+.navbar-filter{
+    background: #f8f8f8 !important;
+}
+
+//Table
+
+thead{
+    background: #FF9800;
+    tr{
+        th{
+            color: #fff;
+        }
+    }
+}
+
+textarea { resize: vertical; } 
+.inputfile{
+    border: dashed 2px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.uk-form-custom{
+    width: 100%;
+}
+
+.submitbutton{
+    width: 50%;
+    margin-top: 20px;
+}
+
+#floating-button {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    cursor: pointer;
+    p{
+        position: absolute;
+        top: 0;
+        display: block;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        line-height: 55px;
+        font-family: 'Roboto';
+        font-weight: 300;
+        animation: plus-out 0.3s;
+        transition: all 0.3s;
+    }
+}
+
+div[ng-reflect-klass="suggestions-container"]
+{
+    z-index: 9999 !important;
+}    
+
+
+//End Table
+
+}
