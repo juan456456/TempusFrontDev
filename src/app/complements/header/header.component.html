@@ -13,21 +13,16 @@
         <ul class="uk-navbar-nav">
           <li class="uk-active">
               <a href="#">
-                  <strong style="margin-right: 10px; color: black;" class="uk-titulo">Bienvenido: {{data.nombre}}</strong>
+                  <strong style="margin-right: 10px; color: rgb(124, 124, 124);" class="uk-titulo">Bienvenido: {{data.nombre}}</strong>
                   <span uk-icon="chevron-down"></span>
                </a>
 
-            <!-- <a href="#">
-              <h3 style="color: #222; margin-top: 10px">Martin  </h3>
-              <span uk-icon="chevron-down"></span>
-            </a> -->
             <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
               <ul class="uk-nav uk-navbar-dropdown-nav">
-                <li class="uk-nav-header">Options</li>
-                <li><a routerLink="/clave" routerLinkActive="active">Edit Profile</a></li>
-                <li class="uk-nav-header">Actions</li>
-                <li><a href="#">Lock</a></li>
-                <li><a (click)="logout()">Logout</a></li>
+                <li class="uk-nav-header">Opciones</li>
+                <li><a routerLink="/clave" routerLinkActive="active"> <i class="fas fa-user-edit"></i> Editar Perfil</a></li>
+                <li class="uk-nav-header">Acciones</li>
+                <li><a (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
               </ul>
             </div>
           </li>

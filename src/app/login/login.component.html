@@ -1,78 +1,75 @@
-<!DOCTYPE html>
+
+
+
 <html>
-    <head>
-        <title>UI Admin - Clean and responsive administration panel</title>
 
-        <meta charset="UTF-8">
-        <meta name="description" content="Clean and responsive administration panel">
-        <meta name="keywords" content="Admin,Panel,HTML,CSS,XML,JavaScript">
-        <meta name="author" content="Erik Campobadal">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>MOP Tools Admin</title>
 
-        
-    </head>
-    <body style="background: url('assets/main/img/bglogin.jpeg'); background-size: cover;">
-        
-        <div class="content-background">
-            <div class="uk-section-large">
-                <div class="uk-container uk-container-large">
-                    <div uk-grid class="uk-child-width-1-1@s uk-child-width-2-3@l">
-                        <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl"></div>
-                        <div class="uk-width-1-1@s uk-width-3-5@l uk-width-1-3@xl">
+    <meta charset="UTF-8">
+    <meta name="description" content="Clean and responsive administration panel">
+    <meta name="keywords" content="Admin,Panel,HTML,CSS,XML,JavaScript">
+    <meta name="author" content="Erik Campobadal">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                            <div class="outer">
+</head>
+<body style="background: url('/assets/bglogin.jpeg');  ">
+    <div>
+        <div class="uk-section-large">
+            <div class="uk-container uk-container-large">
+                <div uk-grid class="uk-child-width-1-1@s uk-child-width-2-3@l">
+                    <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl"></div>
+                    <div class="uk-width-1-1@s uk-width-3-5@l uk-width-1-3@xl">
+
+                        <div class="outer">
                             <div class="middle">
-                            <div class="uk-card uk-card-default login-body inner">
-                                <div class="uk-card-header uk-flex uk-flex-center">
-                                    <img src="https://co.nec.com/nf_global/v3/common/img/site/header-img.png" />
-                                </div>
-                                <div class="uk-card-body">
+                                <div class="uk-card  login-body inner" style="background-color:rgba(0, 0, 0, 0.1);">
+                                    <div class="uk-card-header uk-flex uk-flex-center">
+                                        <img src="https://co.nec.com/nf_global/v3/common/img/site/header-img.png" />
+                                    </div>
+                                    <div class="uk-card-body">
                                         <h2 style="text-align: center">
-                                            <img src="assets/main/img/logo.png" alt="" width="250">
+                                            <img src="/assets/logo_letsgonec_2.png" alt="" width="250">
                                         </h2><br />
-                                    <form [formGroup]="data" (ngSubmit)="login()">
-                                        <fieldset class="uk-fieldset uk-flex uk-flex-center">
+                                        <form [formGroup]="data" (ngSubmit)="login()">
+                                            <fieldset class="uk-fieldset uk-flex uk-flex-center">
 
-                                            <div class="uk-margin">
-                                                <div class="uk-position-relative">
-                                                    <label class="uk-form-icon" uk-icon="icon: mail"></label>
-                                                    <input formControlName="email" class="uk-input" type="email" placeholder="Email">
+                                                <div class="uk-margin" style=" z-index: 1">
+                                                    <div class="uk-position-relative">
+                                                        <label class="uk-form-icon" uk-icon="icon: user"></label>
+                                                        <input formControlName="email" class="uk-input" type="email"
+                                                            placeholder="Email" required>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="uk-margin">
-                                                <div class="uk-position-relative">
-                                                    <label class="uk-form-icon" uk-icon="icon: lock"></label>
-                                                    <input formControlName="password" class="uk-input" type="password" placeholder="Contraseña">
+                                                <div class="uk-margin">
+                                                    <div class="uk-position-relative">
+                                                        <label class="uk-form-icon" uk-icon="icon: lock"></label>
+                                                        <input formControlName="password" class="uk-input"
+                                                            type="password" placeholder="Password">
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <!--
-                                            <div class="uk-margin">
-                                                <a href="#">Forgot your password?</a>
-                                            </div>
-                                            -->
+                                                <div class="uk-margin uk-flex uk-flex-center">
+                                                    <button type="submit" class="uk-button uk-button-primary" [disabled]="!data.valid">
+                                                        <span class="ion-forward"></span>&nbsp; Ingresar
+                                                    </button>
+                                                </div>
 
-                                            <div class="uk-margin uk-flex uk-flex-center">
-                                                <button type="submit" class="uk-button uk-button-primary" [disabled]="!data.valid">
-                                                    <span class="ion-forward"></span>&nbsp; Ingresar
-                                                </button>
-                                            </div>
-
-                                        </fieldset>
-                                    </form>
+                                            </fieldset>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                            </div>
-
-
                         </div>
-                        <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl"></div>
                     </div>
                 </div>
             </div>
         </div>
-        
-    </body>
+    </div>
+    <div class="uk-card" style="text-align:center; color: rgb(0, 0, 0)6, 24, 24)">
+        <p> 2019 © NEC</p>
+    </div>
+</body>
+
 </html>
