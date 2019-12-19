@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AprobacionService } from "src/services/aprobacion.service";
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,12 @@ export class HeaderComponent implements OnInit {
   {
     this.data = JSON.parse(localStorage.getItem("logindata"));
     console.log(this.data);
+    var a = this.data.id;
+    
   }
+ 
+
+
   logout()
   {
     localStorage.clear();

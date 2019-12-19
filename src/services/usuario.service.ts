@@ -14,6 +14,11 @@ export class UsuarioService {
   )
   {}
 
+  listar(): any
+    {
+        const headers = new HttpHeaders(GeneralService.HEADERS('aplication/json'));
+        return this.http.get(this.url + 'listar', {headers : headers});
+    }
 
   actualizarClave(data)
   {

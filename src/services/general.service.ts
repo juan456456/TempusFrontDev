@@ -20,6 +20,7 @@ export class GeneralService {
     return "http://159.203.175.212/loginws/public/ws/";
   }
 
+
   constructor(
     private spinner: NgxSpinnerService
   ) { }

@@ -1,0 +1,96 @@
+<div class="uk-section-small uk-section-default header">
+  <div class="uk-container uk-container-large">
+      <h1><span class="ion-speedometer"></span> Aprobación de horas</h1>
+      <ul class="uk-breadcrumb">
+          <li><a href="/inicio">Inicio</a></li>
+          <li><span href="/Aprobación">Aprobaciónes</span></li>
+          <li><span href="/aprobar-horas">Aprobación de horas </span></li>
+      </ul>
+  </div>
+</div>
+
+<div class="uk-section-small uk-section-default header">
+  <div class="uk-container uk-container-large">
+      <div uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <h3>Lista de Horas </h3>
+          <p>Aquí aparece todas las horas , las cuales pueden ser aprobadas o Desaprobadas segun su estado.
+          </p>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="caption font-dark">
+          <span uk-icon="icon: cog"></span>
+          <span class="uk-label uk-label-success">Horas</span>
+      </div>
+
+      <div class="uk-width-1-2@s">
+          <label class="uk-form-label" for="form-stacked-text">Proyecto</label>
+          <select class=" uk-width uk-select uk-form-width-large" 
+             >
+              <option *ngFor="let proyecto of proyectos" value="{{proyecto.idprojects}}">{{proyecto.name}}</option>
+          </select>
+      </div>
+  </div>
+
+  <div class="uk-section-small" *ngIf="usuarios2 == 0">
+      <div class="uk-container uk-container-large">
+          <div>
+              <div class="uk-card uk-card-default uk-card-body">
+
+                  <div uk-alert>
+                      <h2>El usuario no registra horas extra <i class="fas fa-table"></i></h2>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="uk-overflow-auto" style="padding: 30px" *ngIf="usuarios2 != 0">
+      <table class="uk-table uk-table-small uk-table-divider">
+          <tbody>
+              <tr>
+                  <th>Actividad</th>
+                  <th>Actividad Sec</th>
+                  <th>Fecha ini</th>
+                  <th>Fecha fin</th>
+                  <th>Cantidad de horas</th>
+                  <th>Estado</th>
+                  <th>Accion</th>
+              </tr>
+              <tr *ngFor="let usuario2 of usuarios2" [shAttachMenu]="menu"
+                  (contextmenu)="leftClick(usuario2.idreghoras)">
+
+                  <td>{{usuario2.Act_Nombre}}</td>
+                  <td>{{usuario2.actsec}}</td>
+                  <td>{{usuario2.fechaini}}</td>
+                  <td>{{usuario2.fechafin}}</td>
+                  <td>{{usuario2.canthoras}}</td>
+                  <td *ngIf="usuario2.autorizado == 0">No aprobado</td>
+                  <td *ngIf="usuario2.autorizado == 1">Aprobado</td>
+
+                  <td *ngIf="usuario2.autorizado == 0"><button title="Aprobar" (click)="aprobar(usuario2.idreghoras)" class="uk-button uk-button-primary">
+                      <i class="fas fa-check"></i>
+                      </button>
+                  </td>
+                  <td *ngIf="usuario2.autorizado == 1"><button title="Desaprobar" (click)="desaprobar(usuario2.idreghoras)" class="uk-button uk-button-danger"
+                          (click)="eliminar()"><i class="fas fa-times"></i></button></td>
+                
+
+
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+
+<!--Click Derecho-->
+<sh-context-menu #menu>
+  <ng-template shContextMenuItem let-data>
+      <div (click)="eliminar()">
+          <span uk-icon="icon: trash"></span> Eliminar
+      </div>
+  </ng-template>
+</sh-context-menu>
+<!--Final Menu Clic Derecho-->

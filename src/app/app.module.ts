@@ -15,6 +15,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 //Pages
 import { LoginComponent } from './login/login.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { AprobacionComponent } from './aprobacion/aprobacion/aprobacion.component';
+import { AprobarHorasComponent } from './aprobacion/aprobar-horas/aprobar-horas.component';
+import { AprobarHorasAdminComponent } from './aprobacion/aprobar-horas-admin/aprobar-horas-admin.component';
 
 //Complements
 import { HeaderComponent } from './complements/header/header.component';
@@ -42,6 +45,9 @@ import { LoginService } from '../services/login.service';
 
 
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +61,9 @@ import { LoginService } from '../services/login.service';
     ReporteComponent,
     AgregarHoraComponent,
     ClaveComponent,
+    AprobarHorasComponent,
+    AprobarHorasAdminComponent,
+    AprobacionComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +75,8 @@ import { LoginService } from '../services/login.service';
     FullCalendarModule,
     AutocompleteLibModule,
     NgxSpinnerModule,
-    AngularEditorModule
+    AngularEditorModule,
+    
   ],
   providers: [
     DatePipe,
