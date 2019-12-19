@@ -17,7 +17,7 @@ export class GeneralService {
 
    
   public static get LOGIN_URL(): String {
-    return "http://159.203.175.212/loginws/public/ws/";
+    return "http://localhost/tempusws/public/ws/login";
   }
 
 

@@ -30,6 +30,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { AgregarHoraComponent } from './hora/agregar-hora/agregar-hora.component'; // for FullCalendar!
 import { DatePipe } from '@angular/common';
 import { ClaveComponent } from './clave/clave.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -76,6 +77,7 @@ import { LoginService } from '../services/login.service';
     AutocompleteLibModule,
     NgxSpinnerModule,
     AngularEditorModule,
+    NgxPaginationModule
     
   ],
   providers: [

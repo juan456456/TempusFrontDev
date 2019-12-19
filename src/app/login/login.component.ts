@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     let data = 
     {
       'email' :  this.data.value.email,
-      'password' :  this.data.value.password
+      'clave' :  this.data.value.password
     };
     this.loginService.login(data).subscribe(
   		response => {

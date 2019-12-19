@@ -11,7 +11,7 @@ export class LoginService {
     private http : HttpClient
   ) { }
 
-  url : any = GeneralService.LOGIN_URL + "login";
+  url : any = GeneralService.LOGIN_URL + "/login";
 
 
   login(data): any 

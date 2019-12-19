@@ -52,25 +52,26 @@
         <table class="uk-table uk-table-small uk-table-divider">
             <tbody>
                 <tr>
-                    <th>Colaborador</th>
-                    <th>Pais</th>
+
                     <th>Actividad</th>
                     <th>Actividad Sec</th>
-                    <th>WBS</th>
                     <th>Fecha reg</th>
                     <th>Fecha ini</th>
                     <th>Cant horas</th>
                     <th>Autorizado</th>
-                    <th>Motivo rechazo</th>
-                    <th>Usuario que aprueba</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
                 </tr>
 
-                <tr *ngFor="let reportes of reporte">
-                    <td>{{reportes.idusuario}}</td>
+                <tr *ngFor="let reporte of reportes | paginate: { itemsPerPage: 10, currentPage: p}">
+                    <td>{{reporte.idactividad.Act_Nombre}}</td>
+                    <td>{{reporte.actsec}}</td>
+                    <td>{{reporte.fechaini}}</td>
+                    <td>{{reporte.fechafin}}</td>
+                    <td>{{reporte.canthoras}}</td>
+                    <td><i class="fas fa-check" *ngIf="reporte.autorizado ==1"></i>
+                        <i class="fas fa-times" *ngIf="reporte.autorizado ==0"></i></td>
                 </tr>
             </tbody>
         </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
 </div>
