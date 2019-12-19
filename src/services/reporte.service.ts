@@ -15,11 +15,12 @@ export class ReporteService {
 
     public url: any = GeneralService.WS_URL + "reporte/";
 
-    listar(): any
+    listar(id): any
     {
         const headers = new HttpHeaders(GeneralService.HEADERS('aplication/json'));
-        return this.http.get(this.url + 'listar', {headers : headers});
+        return this.http.get(this.url + 'listar/' + id, {headers : headers});
     }
+
 
     editar(form): any
     {
@@ -28,9 +29,23 @@ export class ReporteService {
     return this.http.put(this.url + 'actualizar', data, { headers : headers });
     }
 
+
     eliminar(id): any
     {
         const headers = new HttpHeaders(GeneralService.HEADERS('aplication/json'));
         return this.http.delete(this.url + 'eliminar/' + id, {headers : headers});
+    }
+
+
+    listartabla(): any
+    {
+        const headers = new HttpHeaders(GeneralService.HEADERS('aplication/json'));
+        return this.http.get(this.url + 'listartabla', {headers : headers});
+    }
+
+    filtrarxFechas(fecha_inicial, fecha_final): any
+    {
+        const headers = new HttpHeaders(GeneralService.HEADERS('aplication/json'));
+        return this.http.get(this.url + 'filtraringreso/'+fecha_inicial+ "/" + fecha_final, {headers : headers});
     }
 }
