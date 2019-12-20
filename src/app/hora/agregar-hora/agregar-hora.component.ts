@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ɵConsole } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActividadService } from 'src/services/actividad.service';
 import { Actividad } from 'src/models/actividad.model.';
@@ -9,6 +9,7 @@ import {RegHora} from 'src/models/reghora.model';
 import { RegHoraService } from 'src/services/reghora.service';
 import { GeneralService } from 'src/services/general.service';
 import { Observable } from 'rxjs';
+import {ProyectosService} from "src/services/proyectos.service";
 
 @Component({
   selector: 'app-agregar-hora',
@@ -23,7 +24,9 @@ export class AgregarHoraComponent implements OnInit {
     private projectService : ProjectService,
     private projectDetailService : ProjectDetailService,
     private reghoraService : RegHoraService,
-    private generalService : GeneralService
+    private generalService : GeneralService,
+    private projectosService : ProyectosService,
+
   ) { }
 
   public formulario : FormGroup;
@@ -39,6 +42,11 @@ export class AgregarHoraComponent implements OnInit {
   public actividadesJefatura : Array<Actividad> = [];
   public actividadesNovedades : Actividad;
   public k_actividadesNovedades : any = "Act_Nombre";
+  public proyectos : any;
+  public id :any;   
+  public data: any = [];
+  public variable_ap: any;
+
   @Input() fecha_inicial : any; 
   @Input() fecha_final : any; 
 
@@ -54,7 +62,8 @@ export class AgregarHoraComponent implements OnInit {
    */
   ngOnInit()
   {
-    
+    this.data = JSON.parse(localStorage.getItem("logindata"));
+      this.id = this.data.id;
   }
 
   /**
@@ -84,19 +93,15 @@ export class AgregarHoraComponent implements OnInit {
       form['fase_proyecto'] = ['', Validators.required];
       form['actividad_secundaria'] = ['', Validators.required];
     }
-    
     if(this.pestana == 'administrativas')
     {
       form['fase_proyecto'] = [null];
       form['actividad_secundaria'] = ['', Validators.required];
-    }
-
+    } 
     if(this.pestana == 'novedades')
     {
       form['actividad_secundaria'] = [null];
     }
-
-    
     this.formulario = this.formBuilder.group(form);
   }
   
@@ -107,7 +112,7 @@ export class AgregarHoraComponent implements OnInit {
 
   listarTodo()
   {
-    this.listarActividadesGenerales(1,3).subscribe(res => {
+    this.listarActividadesGenerales().subscribe(res => {
       this.actividades = res;
       this.listarActividadesDelivery(1,4).subscribe(res => {
         this.actividades = this.actividades.concat(res);
@@ -130,10 +135,10 @@ export class AgregarHoraComponent implements OnInit {
    *
    * @memberof AgregarHoraComponent
    */
-  listarActividadesGenerales(estado, tipo) : any
+  listarActividadesGenerales() : any
   {
     const observable = new Observable(observer => {
-      this.actividadService.listarPorTipo(estado, tipo).subscribe(
+      this.actividadService.listarPorTipo(this.id).subscribe(
         response => {
           observer.next(response);
         },
@@ -152,20 +157,27 @@ export class AgregarHoraComponent implements OnInit {
    * @param {*} tipo
    * @memberof AgregarHoraComponent
    */
-  listarActividadesDelivery(estado, tipo) : any
+  listarActividadesDelivery() : any
   {
-    const observable = new Observable(observer => {
-      this.actividadService.listarPorTipo(estado, tipo).subscribe(
-        response => {
-          observer.next(response);
+    
+      this.actividadService.listarPorTipo(this.id).subscribe(
+        response => { 
+          this.actividades = response;
+          if (this.actividades == null) {
+  
+          } else {
+            this.actividades = response;
+            console.log(this.actividades);
+          }
         },
         error => {
           console.log(<any>error);
         }
       );
-    });
-    return observable;
+   
+    
   }
+ 
 
   /**
    *Listar actividades por jefatura
@@ -194,16 +206,23 @@ export class AgregarHoraComponent implements OnInit {
    *
    * @memberof AgregarHoraComponent
    */
-  listarProjects()
-  {
-    this.projectService.listar().subscribe(
-  		response => {
+ 
+
+  listarProjects() {
+    this.projectosService.listar(this.id).subscribe(
+      response => { 
         this.projects = response;
-  		},
-  		error => {
-  			console.log(<any>error);
-  		}
-    );
+        if (this.projects == null) {
+
+        } else {
+          this.projects = response;
+          console.log(this.projects);
+        }
+      },
+      error => {
+        console.log(<any>error);
+      }
+    )
   }
 
   /**
@@ -268,12 +287,19 @@ export class AgregarHoraComponent implements OnInit {
   agregar()
   {
     let reghora = new RegHora();
-    reghora.idusuario = 1001;
+    console.log("Prin",this.variable_ap);
+    reghora.idusuario = this.id;
+    console.log(this.id);
     reghora.fechaini = this.formulario.value.fecha_inicial;
+    console.log(this.formulario.value.fecha_inicial);
     reghora.fechafin = this.formulario.value.fecha_final;
+    console.log(this.formulario.value.fecha_inicial);
     reghora.idactividad = this.formulario.value.actividad_principal;
+    console.log(this.formulario.value.actividad_principal);
     reghora.actsec = this.formulario.value.actividad_secundaria;
+    console.log(this.formulario.value.actividad_secundaria);
     reghora.proyecto = this.verProyecto();
+    console.log(this.verProyecto);
     
     if(this.pestana == 'proyectos')
       reghora.tiporeg = 1;
@@ -283,7 +309,9 @@ export class AgregarHoraComponent implements OnInit {
       reghora.tiporeg = 3;
 
     reghora.idtiporeg = this.formulario.value.fase_proyecto;
+    console.log(this.formulario.value.fase_proyecto);
     reghora.txttiporeg = this.txttiporeg();
+    console.log(this.txttiporeg);
     
     this.generalService.abrirSpinner();
     this.reghoraService.agregar(reghora).subscribe(
@@ -297,8 +325,8 @@ export class AgregarHoraComponent implements OnInit {
   		}
     );
     
-   alert(reghora.tiporeg)
-  }
+/*    alert(reghora.tiporeg)
+ */  }
 
   
   /**
@@ -344,13 +372,15 @@ export class AgregarHoraComponent implements OnInit {
   }
 
   //Métodos SelectBox para Actividades
-  selectActividad(e){
-    this.formulario.value.actividad_principal = e.id;
+  selectActividad(id){
+    this.formulario.value.actividad_principal = id;
   }
   onFocusedActividad(e){
     this.formulario.value.actividad_principal = null;
   }
-  onChangeActividad(e){}
+  onChangeActividad(e){
+    console.log("Actividad",e)
+  }
 
   //Métodos SelectBox Projects
   selectProject(e)

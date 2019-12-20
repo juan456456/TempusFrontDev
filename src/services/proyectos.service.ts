@@ -19,4 +19,5 @@ export class ProyectosService {
   	return this.http.get(this.url + 'listar/' + id, {headers : headers}); 
   }
   
+  
 }

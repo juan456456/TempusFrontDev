@@ -3,7 +3,6 @@ import { GeneralService } from 'src/services/general.service';
 import { AprobacionService } from "src/services/aprobacion.service";
 import {ProyectosService} from "src/services/proyectos.service";
 
-
 @Component({
   selector: 'app-aprobar-horas',
   templateUrl: './aprobar-horas.component.html',
@@ -35,7 +34,7 @@ export class AprobarHorasComponent implements OnInit {
 
   listar() {
     this.projectosService.listar(this.id).subscribe(
-      response => {
+      response => { 
         this.proyectos = response;
         if (this.proyectos == null) {
 

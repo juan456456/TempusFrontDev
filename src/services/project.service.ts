@@ -19,18 +19,18 @@ export class ProjectService {
   	return this.http.get(this.url + 'listar', {headers : headers}); 
   }
   
-  /*
-  listarPorTipo(estado, tipo): any
+  /* 
+  listarPorTipo(id): any
   {
     const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
-  	return this.http.get(this.url + 'listarxtipo/' + estado + '/' + tipo, {headers : headers}); 
-  }
+  	return this.http.get(this.url + 'listarxtipo/' + id , {headers : headers}); 
+  } */
 
-  listarPorJefatura(estado, jefatura): any
+  /* listarPorJefatura(estado, jefatura): any
   {
     const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
   	return this.http.get(this.url + 'listarxjefatura/' + estado + '/' + jefatura, {headers : headers}); 
   }
-  */
-
+  
+ */
 }

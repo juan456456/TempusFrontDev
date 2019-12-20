@@ -25,7 +25,11 @@
             <span class="uk-label uk-label-success">Horas</span>
         </div>
 
-        <div class="uk-width-1-2@s">
+        <div class="uk-section-small" *ngIf="usuarios == 0">
+           
+        </div>
+
+        <div class="uk-width-1-2@s"  *ngIf="usuarios != 0">
             <label class="uk-form-label" for="form-stacked-text">Colaborador</label>
             <select class=" uk-width uk-select uk-form-width-large" [(ngModel)]="idcolaborador"
                 (ngModelChange)="consultar()">
@@ -38,7 +42,6 @@
         <div class="uk-container uk-container-large">
             <div>
                 <div class="uk-card uk-card-default uk-card-body">
-
                     <div uk-alert>
                         <h2>El usuario no registra horas extra <i class="fas fa-table"></i></h2>
                     </div>
@@ -69,7 +72,6 @@
                     <td>{{usuario2.canthoras}}</td>
                     <td *ngIf="usuario2.autorizado == 0">No aprobado</td>
                     <td *ngIf="usuario2.autorizado == 1">Aprobado</td>
-
                     <td *ngIf="usuario2.autorizado == 0"><button title="Aprobar" (click)="aprobar(usuario2.idreghoras)" class="uk-button uk-button-primary">
                         <i class="fas fa-check"></i>
                         </button>
