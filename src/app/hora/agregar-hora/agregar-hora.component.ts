@@ -46,7 +46,8 @@ export class AgregarHoraComponent implements OnInit {
   public id :any;   
   public data: any = [];
   public variable_ap: any;
-
+  public idActividad : any;
+  public verProyectoo : any;
   @Input() fecha_inicial : any; 
   @Input() fecha_final : any; 
 
@@ -74,7 +75,6 @@ export class AgregarHoraComponent implements OnInit {
   ngOnChanges()
   {
     this.actualizarFormulario();
-
     this.listarTodo();
     this.listarActividadesAdministrativas(this.proyecto);
     this.listarProjects();
@@ -112,9 +112,11 @@ export class AgregarHoraComponent implements OnInit {
 
   listarTodo()
   {
+    console.log("AQUIIIII")
+    console.log(this.proyecto)
     this.listarActividadesGenerales().subscribe(res => {
       this.actividades = res;
-      this.listarActividadesDelivery(1,4).subscribe(res => {
+      this.listarActividadesDelivery().subscribe(res => {
         this.actividades = this.actividades.concat(res);
         this.listarActividadesJefatura(1, this.jefatura, this.proyecto).subscribe(res => {
           this.actividades = this.actividades.concat(res);
@@ -159,7 +161,6 @@ export class AgregarHoraComponent implements OnInit {
    */
   listarActividadesDelivery() : any
   {
-    
       this.actividadService.listarPorTipo(this.id).subscribe(
         response => { 
           this.actividades = response;
@@ -186,6 +187,7 @@ export class AgregarHoraComponent implements OnInit {
    * @param {*} jefatura
    * @memberof AgregarHoraComponent
    */
+
   listarActividadesJefatura(estado, jefatura, proyecto) : any
   {
     const observable = new Observable(observer => {
@@ -289,17 +291,17 @@ export class AgregarHoraComponent implements OnInit {
     let reghora = new RegHora();
     console.log("Prin",this.variable_ap);
     reghora.idusuario = this.id;
-    console.log(this.id);
+
     reghora.fechaini = this.formulario.value.fecha_inicial;
-    console.log(this.formulario.value.fecha_inicial);
+
     reghora.fechafin = this.formulario.value.fecha_final;
-    console.log(this.formulario.value.fecha_inicial);
+
     reghora.idactividad = this.formulario.value.actividad_principal;
+    
     console.log(this.formulario.value.actividad_principal);
+
     reghora.actsec = this.formulario.value.actividad_secundaria;
-    console.log(this.formulario.value.actividad_secundaria);
-    reghora.proyecto = this.verProyecto();
-    console.log(this.verProyecto);
+    reghora.proyecto = this.verProyectoo;
     
     if(this.pestana == 'proyectos')
       reghora.tiporeg = 1;
@@ -312,9 +314,10 @@ export class AgregarHoraComponent implements OnInit {
     console.log(this.formulario.value.fase_proyecto);
     reghora.txttiporeg = this.txttiporeg();
     console.log(this.txttiporeg);
-    
+    console.log(this.verProyectoo)
+    console.log(reghora)
     this.generalService.abrirSpinner();
-    this.reghoraService.agregar(reghora).subscribe(
+     this.reghoraService.agregar(reghora).subscribe(
   		response => {
         this.generalService.cerrarSpinner();
         GeneralService.ABRIR_MENSAJE("La hora se ha cargado correctamente", "success");
@@ -323,7 +326,7 @@ export class AgregarHoraComponent implements OnInit {
         GeneralService.ABRIR_MENSAJE("Verificar información", "error");
   			console.log(<any>error);
   		}
-    );
+    ); 
     
 /*    alert(reghora.tiporeg)
  */  }
@@ -360,15 +363,20 @@ export class AgregarHoraComponent implements OnInit {
    */
   verProyecto()
   {
-    if(this.actividades.length > 0 && this.pestana == 'administrativas')
+
+      if(this.actividades.length > 0 && this.pestana == 'administrativas')
     {
+      console.log(this.actividadesAdministrativas)
+      console.log(this.idActividad)
       let val = this.actividadesAdministrativas.find(
-        x => x.id == this.formulario.value.actividad_principal
+        x => x.id == this.idActividad
       );
-      return val.proyecto;
+      console.log(val);
+      this.verProyectoo = val.proyecto;
     }else{
       return null;
-    }
+    }  
+   
   }
 
   //Métodos SelectBox para Actividades
