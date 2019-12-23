@@ -48,12 +48,15 @@ export class AgregarHoraComponent implements OnInit {
   public variable_ap: any;
   public idActividad : any;
   public verProyectoo : any;
+  public proyecto : any;
+  public jefatura : any;  
   @Input() fecha_inicial : any; 
   @Input() fecha_final : any; 
 
   // ### Valores necesarios al iniciar sesion
-  public proyecto : string = "9S7CR-000122";
-  public jefatura : number = 6;
+
+  /*  public proyecto : string = "9S7CR-000122";
+  public jefatura : number = 6; */
 
 
   /**
@@ -64,7 +67,11 @@ export class AgregarHoraComponent implements OnInit {
   ngOnInit()
   {
     this.data = JSON.parse(localStorage.getItem("logindata"));
-      this.id = this.data.id;
+      this.id = this.data.idusu;
+      this.proyecto = this.data.proyadmin;
+      this.jefatura = this.data.idjefatura;
+      console.log(this.proyecto);
+      console.log(this.jefatura);
   }
 
   /**
@@ -165,7 +172,6 @@ export class AgregarHoraComponent implements OnInit {
         response => { 
           this.actividades = response;
           if (this.actividades == null) {
-  
           } else {
             this.actividades = response;
             console.log(this.actividades);
@@ -175,8 +181,7 @@ export class AgregarHoraComponent implements OnInit {
           console.log(<any>error);
         }
       );
-   
-    
+
   }
  
 

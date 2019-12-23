@@ -43,7 +43,6 @@ import { RegHoraService } from '../services/reghora.service';
 import { UsuarioService } from 'src/services/usuario.service';
 import { LoginService } from '../services/login.service';
 
-import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -77,7 +76,6 @@ import { ChartsModule } from 'ng2-charts';
     AutocompleteLibModule,
     NgxSpinnerModule,
     AngularEditorModule,
-    ChartsModule
     
   ],
   providers: [

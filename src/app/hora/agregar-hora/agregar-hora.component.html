@@ -28,14 +28,8 @@
             <li class="uk-grid-small" uk-grid uk-grid>
                 <div class="uk-width-1-2@s" *ngIf="pestana === 'proyectos'">
                     <label class="uk-form-label" for="form-stacked-text">Actividad principal</label>
-
-
                     <select class="uk-select" formControlName="actividad_principal">
-                        <option *ngFor="let actividad of actividades"  
-
-                            value="{{actividad.id}}">
-                            {{actividad.Act_Nombre}} 
-                        </option>
+                        <option *ngFor="let actividad of actividades" value="{{actividad.id}}">{{actividad.Act_Nombre}}</option>
                     </select>
                     
                     

@@ -17,7 +17,7 @@ export class GeneralService {
 
    
   public static get LOGIN_URL(): String {
-    return "http://159.203.175.212/loginws/public/ws/";
+    return "http://localhost/tempus2/public/ws/login/";
   }
 
 
@@ -57,7 +57,7 @@ export class GeneralService {
 
   //Variables globales
 
-  public static WS_URL: string = 'http://localhost/tempus1/public/ws/';
+  public static WS_URL: string = 'http://localhost/tempus2/public/ws/';
 
   public static HEADERS(contenttype: any): any {
     let json;

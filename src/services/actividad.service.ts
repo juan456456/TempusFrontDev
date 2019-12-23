@@ -15,25 +15,25 @@ export class ActividadService {
 
   listarPorTipo(id): any
   {
-    const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
-  	return this.http.get(this.url + 'listarxtipo/' + id, {headers : headers}); 
-  }
+    const headers = new HttpHeaders(('application/json'));
+  	return this.http.get(this.url + 'listar/' + id, {headers : headers}); 
+  } 
 
   listarPorJefatura(estado, jefatura, proyecto): any
   {
-    const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
+    const headers = new HttpHeaders(('application/json'));
   	return this.http.get(this.url + 'listarxjefatura/' + estado + '/' + jefatura + '/' + proyecto, {headers : headers}); 
   }
 
   listarNovedades(): any
   {
-    const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
+    const headers = new HttpHeaders(('application/json'));
   	return this.http.get(this.url + 'listarnovedades', {headers : headers}); 
   }
 
   listarAdministrativas(proyecto) : any 
   {
-    const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
+    const headers = new HttpHeaders(('application/json'));
   	return this.http.get(this.url + 'listaradministrativas/' + proyecto, {headers : headers}); 
   }
 

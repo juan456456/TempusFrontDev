@@ -29,7 +29,7 @@
            
         </div>
 
-        <div class="uk-width-1-2@s"  *ngIf="usuarios != 0">
+        <div class="uk-width-1-1@s"  *ngIf="usuarios != 0">
             <label class="uk-form-label" for="form-stacked-text">Colaborador</label>
             <select class=" uk-width uk-select uk-form-width-large" [(ngModel)]="idcolaborador"
                 (ngModelChange)="consultar()">
@@ -62,8 +62,7 @@
                     <th>Estado</th>
                     <th>Accion</th>
                 </tr>
-                <tr *ngFor="let usuario2 of usuarios2" [shAttachMenu]="menu"
-                    (contextmenu)="leftClick(usuario2.idreghoras)">
+                <tr *ngFor="let usuario2 of usuarios2" >
 
                     <td>{{usuario2.Act_Nombre}}</td>
                     <td>{{usuario2.actsec}}</td>
