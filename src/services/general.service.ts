@@ -57,7 +57,7 @@ export class GeneralService {
 
   //Variables globales
 
-  public static WS_URL: string = 'http://localhost/tempusws/public/ws/';
+  public static WS_URL: string = 'http://localhost/tempus1/public/ws/';
 
   public static HEADERS(contenttype: any): any {
     let json;
