@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
         //this.generalService.abrirMensaje("Ingreso correcto al sistema", "success");
         localStorage.setItem("loginstatus", "true");
         localStorage.setItem("logindata", JSON.stringify(response));
+        console.log(response)
         window.location.href = '';
   		},
   		error => {
