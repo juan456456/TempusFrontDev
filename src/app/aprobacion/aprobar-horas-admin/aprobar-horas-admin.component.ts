@@ -22,7 +22,7 @@ export class AprobarHorasAdminComponent implements OnInit {
 
   ngOnInit() {
     this.data = JSON.parse(localStorage.getItem("logindata"));
-    this.id = this.data.id;
+    this.id = this.data.idusu;
     console.log(this.id);
     this.listar();
   }
