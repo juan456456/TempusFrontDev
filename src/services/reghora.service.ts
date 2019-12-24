@@ -16,13 +16,13 @@ export class RegHoraService {
   
   listar() : any
   {
-    const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
+    const headers = new HttpHeaders(  ('application/json'));
   	return this.http.get(this.url + 'listar', {headers : headers}); 
   }
   
   agregar(data : RegHora) : any
   {
-    const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
+    const headers = new HttpHeaders(  ('application/json'));
     console.log(data)
     return this.http.post(this.url + 'insertar', data, {headers : headers}); 
   }

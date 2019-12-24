@@ -16,14 +16,14 @@ export class ProjectDetailService {
   /*
   listar() : any
   {
-    const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
+    const headers = new HttpHeaders(  ('application/json'));
   	return this.http.get(this.url + 'listar', {headers : headers}); 
   }
   */
 
   listarPorProject(idProject)
   {
-      const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
+      const headers = new HttpHeaders(  ('application/json'));
   	return this.http.get(this.url + 'listarfases/' + idProject, {headers : headers}); 
   }
 

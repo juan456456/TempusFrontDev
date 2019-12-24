@@ -15,8 +15,15 @@ export class ProyectosService {
 
   listar(id) : any
   {
-    const headers = new HttpHeaders(GeneralService.HEADERS('application/json'));
-  	return this.http.get(this.url + 'listar/' + id, {headers : headers}); 
+    const headers = new HttpHeaders(('application/json'));
+  	return this.http.get(this.url + 'listarprojectos/' + id, {headers : headers}); 
+  }
+  
+  
+  consultar(id) 
+  {
+    const headers = new HttpHeaders(('application/json'));
+  	return this.http.get(this.url + 'listarprojects' + '/'+ id, {headers : headers}); 
   }
   
 }
