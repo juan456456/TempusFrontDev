@@ -62,7 +62,7 @@
                 </tr>
 
                 <tr *ngFor="let reporte of reportes | paginate: { itemsPerPage: 10, currentPage: p}">
-                    <td>{{reporte.idactividad.Act_Nombre}}</td>
+                    <td>{{reporte.actividad.Act_Nombre}}</td>
                     <td>{{reporte.actsec}}</td>
                     <td>{{reporte.fechaini}}</td>
                     <td>{{reporte.fechafin}}</td>
