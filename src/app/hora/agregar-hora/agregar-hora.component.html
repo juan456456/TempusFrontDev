@@ -1,4 +1,3 @@
-
 <!-- Proyectos y horas administrativas -->
 <form class="uk-grid-small" uk-grid uk-grid [formGroup]="formulario" (ngSubmit)="agregar()">
 
@@ -6,7 +5,7 @@
         <label class="uk-form-label" for="form-stacked-text">Fecha inicial </label>
         <div class="uk-inline">
             <span class="uk-form-icon" uk-icon="icon: calendar"></span>
-            <input class="uk-input" type="text" value="0000-00-00 00:00:00" formControlName="fecha_inicial" readonly />
+            <input class="uk-input" type="text" formControlName="fecha_inicial" readonly />
         </div>
     </div>
 
@@ -14,7 +13,7 @@
         <label class="uk-form-label" for="form-stacked-text">Fecha final </label>
         <div class="uk-inline">
             <span class="uk-form-icon" uk-icon="icon: calendar"></span>
-            <input class="uk-input" type="text" value="0000-00-00 00:00:00" formControlName="fecha_final" readonly />
+            <input class="uk-input" type="text" formControlName="fecha_final" readonly />
         </div>
     </div>
 
@@ -26,78 +25,55 @@
         </ul>
         <ul class="uk-switcher uk-margin">
             <!-- Proyectos -->
-            <li class="uk-grid-small" uk-grid uk-grid >
+            <li class="uk-grid-small" uk-grid uk-grid>
                 <div class="uk-width-1-2@s" *ngIf="pestana === 'proyectos'">
                     <label class="uk-form-label" for="form-stacked-text">Actividad principal</label>
-                    <div class="ng-autocomplete" style="width: auto;">
-                        <ng-autocomplete [data]="actividades" [searchKeyword]="k_actividades"
-                            (selected)='selectActividad($event)' (inputChanged)='onChangeActividad($event)'
-                            (inputFocused)='onFocusedActividad($event)' [itemTemplate]="actividadesT"
-                            [notFoundTemplate]="notFoundTemplate">
-                        </ng-autocomplete>
+                    <select class="uk-select" formControlName="actividad_principal">
+                        <option *ngFor="let actividad of actividades" value="{{actividad.id}}">{{actividad.Act_Nombre}}
+                        </option>
+                    </select>
 
-                        <ng-template #actividadesT let-item>
-                            <a [innerHTML]="item.Act_Nombre"></a>
-                        </ng-template>
 
-                        <ng-template #notFoundTemplate let-notFound>
-                            <div [innerHTML]="notFound"></div>
-                        </ng-template>
-                    </div>
                 </div>
                 <div class="uk-width-1-2@s">
                     <label class="uk-form-label" for="form-stacked-text">Actividad secundaria</label>
                     <input class="uk-input" type="text" formControlName="actividad_secundaria" required />
                 </div>
                 <div class="uk-width-1-1@s">
-                    <label class="uk-form-label" for="form-stacked-text">Seleccionar proyecto</label>
-                    <div class="ng-autocomplete" style="width: auto;">
-                        <ng-autocomplete [data]="projects" [searchKeyword]="k_projects"
-                            (selected)='selectProject($event)' (inputChanged)='onChangeProject($event)'
-                            (inputFocused)='onProject($event)' [itemTemplate]="projectsT"
-                            [notFoundTemplate]="notFoundTemplate">
-                        </ng-autocomplete>
 
-                        <ng-template #projectsT let-item>
-                            <a [innerHTML]="item.name"></a>
-                        </ng-template>
-
-                        <ng-template #notFoundTemplate let-notFound>
-                            <div [innerHTML]="notFound"></div>
-                        </ng-template>
+                    <div class="uk-width-1-1s@s" *ngIf="pestana === 'proyectos'">
+                        <label class="uk-form-label" for="form-stacked-text">Actividad principal</label>
+                        <select class="uk-select" formControlName="actividad_principal">
+                            <option *ngFor="let proyectos of projects" value="{{proyectos.idprojects}}">{{proyectos.name}}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="uk-width-1-1@s" *ngIf="projectDetail != null">
                     <label class="uk-form-label" for="form-stacked-text">Seleccionar fase</label>
+
                     <select class="uk-select" formControlName="fase_proyecto">
                         <option value="null">Seleccionar fase</option>
-                        <option *ngFor="let project of projectDetail.projects_activities"  
+                        <option *ngFor="let project of projectDetail.projects_activities"
                             value="{{project.idprojectactivityu}}">
                             {{projectDetail.name}} // {{projectDetail.wbs_element}} - {{project.wbs_element}} //
                             {{project.name}}
                         </option>
                     </select>
+
+
                 </div>
             </li>
             <!-- Administrativas -->
-            <li class="uk-grid-small" uk-grid uk-grid >
+            <li class="uk-grid-small" uk-grid uk-grid>
+
                 <div class="uk-width-1-2@s" *ngIf="pestana == 'administrativas'">
                     <label class="uk-form-label" for="form-stacked-text">Actividad principal</label>
-                    <div class="ng-autocomplete" style="width: auto;">
-                        <ng-autocomplete [data]="actividadesAdministrativas"
-                            [searchKeyword]="k_actividadesAdministrativas" (selected)='selectActividadAdministrativa($event)'
-                            (inputChanged)='onChangeActividadAdministrativa($event)' (inputFocused)='onFocusedActividadAdministrativa($event)'
-                            [itemTemplate]="actividadesAdministrativasT" [notFoundTemplate]="notFoundTemplate">
-                        </ng-autocomplete>
-
-                        <ng-template #actividadesAdministrativasT let-item>
-                            <a [innerHTML]="item.Act_Nombre"></a>
-                        </ng-template>
-
-                        <ng-template #notFoundTemplate let-notFound>
-                            <div [innerHTML]="notFound"></div>
-                        </ng-template>
-                    </div>
+                    <select class="uk-select" formControlName="actividad_principal" [(ngModel)]="idActividad" (ngModelChange)="verProyecto()">
+                        <option *ngFor="let actividad of actividades" value="{{actividad.id}}">
+                            {{actividad.Act_Nombre}}
+                        </option>
+                    </select>
                 </div>
                 <div class="uk-width-1-2@s">
                     <label class="uk-form-label" for="form-stacked-text">Actividad secundaria</label>
@@ -105,14 +81,11 @@
                 </div>
             </li>
             <!-- Novedades -->
-            <li class="uk-grid-small" uk-grid uk-grid >
+            <li class="uk-grid-small" uk-grid uk-grid>
                 <div class="uk-width-1-2@s" *ngIf="pestana == 'novedades'">
                     <label class="uk-form-label" for="form-stacked-text">Seleccionar novedad</label>
                     <div class="ng-autocomplete" style="width: auto;">
-                        <ng-autocomplete [data]="actividadesNovedades"
-                            [searchKeyword]="k_actividadesNovedades" (selected)='selectNovedad($event)'
-                            (inputChanged)='onChangeNovedad($event)' (inputFocused)='onFocusedNovedad($event)'
-                            [itemTemplate]="actividadesNovedadesT" [notFoundTemplate]="notFoundTemplate">
+                        <ng-autocomplete [data]="actividadesNovedades" [searchKeyword]="k_actividadesNovedades" (selected)='selectNovedad($event)' (inputChanged)='onChangeNovedad($event)' (inputFocused)='onFocusedNovedad($event)' [itemTemplate]="actividadesNovedadesT" [notFoundTemplate]="notFoundTemplate">
                         </ng-autocomplete>
 
                         <ng-template #actividadesNovedadesT let-item>
@@ -125,13 +98,13 @@
                     </div>
                 </div>
             </li>
-            
+
         </ul>
     </div>
 
     <hr />
     <div class="uk-width-1-1@s" style="text-align: center">
-        <button type="submit" class="uk-button uk-button-primary" style="width: 50%" [disabled]="formulario.valid">Agregar</button>
+        <button type="submit" class="uk-button uk-button-primary" style="width: 50%">Agregar</button>
     </div>
 
 </form>

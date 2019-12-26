@@ -44,11 +44,7 @@ export class ReporteComponent implements OnInit {
     this.listartabla();
     }
     
-
-  
-
-
-
+    
   listar() {
     this.reporteService.listar(this.id)
     .subscribe(

@@ -13,10 +13,10 @@ export class ActividadService {
 
   url : any = GeneralService.WS_URL + "actividad/";
 
-  listarPorTipo(estado, tipo): any
+  listarPorTipo(id): any
   {
     const headers = new HttpHeaders(  ('application/json'));
-  	return this.http.get(this.url + 'listarxtipo/' + estado + '/' + tipo, {headers : headers}); 
+  	return this.http.get(this.url + 'listarxtipo/' + id, {headers : headers}); 
   }
 
   listarPorJefatura(estado, jefatura, proyecto): any

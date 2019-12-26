@@ -13,10 +13,10 @@ export class ProyectosService {
 
   url : any = GeneralService.WS_URL + "project/";
 
-  listar(id) : any
+  listar() : any
   {
     const headers = new HttpHeaders(('application/json'));
-  	return this.http.get(this.url + 'listarprojectos/' + id, {headers : headers}); 
+  	return this.http.get(this.url + 'listarprojectos' , {headers : headers}); 
   }
   
   
