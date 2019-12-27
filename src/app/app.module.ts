@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from'@angular/common/http';
 
+
 //Libraries
 import {ShContextMenuModule} from 'ng2-right-click-menu';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ChartsModule } from 'ng2-charts';
 
 
 //Pages
@@ -18,6 +20,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { AprobacionComponent } from './aprobacion/aprobacion/aprobacion.component';
 import { AprobarHorasComponent } from './aprobacion/aprobar-horas/aprobar-horas.component';
 import { AprobarHorasAdminComponent } from './aprobacion/aprobar-horas-admin/aprobar-horas-admin.component';
+
 
 //Complements
 import { HeaderComponent } from './complements/header/header.component';
@@ -33,8 +36,6 @@ import { ClaveComponent } from './clave/clave.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 
-
-
 //Servicios
 import { ReporteService } from '../services/reporte.service';
 import { ActividadService } from '../services/actividad.service';
@@ -43,10 +44,7 @@ import { ProjectDetailService } from '../services/projectdetail.service';
 import { RegHoraService } from '../services/reghora.service';
 import { UsuarioService } from 'src/services/usuario.service';
 import { LoginService } from '../services/login.service';
-
-
-
-
+import { InicioService } from '../services/inicio.service';
 
 
 @NgModule({
@@ -66,6 +64,7 @@ import { LoginService } from '../services/login.service';
     AprobarHorasAdminComponent,
     AprobacionComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -77,9 +76,10 @@ import { LoginService } from '../services/login.service';
     AutocompleteLibModule,
     NgxSpinnerModule,
     AngularEditorModule,
-    NgxPaginationModule
-    
+    NgxPaginationModule,
+    ChartsModule
   ],
+
   providers: [
     DatePipe,
     ReporteService,
@@ -88,9 +88,10 @@ import { LoginService } from '../services/login.service';
     ProjectDetailService,
     RegHoraService,
     LoginService,
-    UsuarioService
-
+    UsuarioService,
+    InicioService
   ],
+  
   bootstrap: [AppComponent]
 })
 
