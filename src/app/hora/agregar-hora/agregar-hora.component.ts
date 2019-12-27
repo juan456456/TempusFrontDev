@@ -10,6 +10,7 @@ import { RegHoraService } from 'src/services/reghora.service';
 import { GeneralService } from 'src/services/general.service';
 import { Observable } from 'rxjs';
 import {ProyectosService} from "src/services/proyectos.service";
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-agregar-hora',
@@ -48,16 +49,18 @@ export class AgregarHoraComponent implements OnInit {
   public variable_ap: any;
   public idActividad : any;
   public verProyectoo : any;
+  public idProject : any;
  /*  public proyecto : any;
   public jefatura : any;  */ 
   public estado : any;  
+  public  : any;
 
   @Input() fecha_inicial : any; 
   @Input() fecha_final : any; 
-
+public prodetailid;
   // ### Valores necesarios al iniciar sesion
-  public proyecto : string = "9S7CR-000122";
-  public jefatura : number = 6;
+  public proyecto : any;
+  public jefatura : any;
   /*  public proyecto : string = "9S7CR-000122";
   public jefatura : number = 6; */
 
@@ -72,12 +75,13 @@ export class AgregarHoraComponent implements OnInit {
     this.data = JSON.parse(localStorage.getItem("logindata"));
       this.id = this.data.idusu;
       this.estado = this.data.estado;
+      this.proyecto = this.data.proyadmin;
+      this.jefatura = this.data.idjefatura;
      /*  this.proyecto = this.data.proyadmin;
       this.jefatura = this.data.idjefatura; */
-      this.listarProjects(this.id);
+      this.listarProjects();
 
-      console.log("datos",this.data);
-      console.log(this.jefatura);
+
   }
 
   /**
@@ -124,8 +128,8 @@ export class AgregarHoraComponent implements OnInit {
 
   listarTodo()
   {
-    console.log("AQUIIIII")
-    console.log(this.proyecto)
+    
+ 
     this.listarActividadesGenerales().subscribe(res => {
       this.actividades = res;
       this.listarActividadesDelivery().subscribe(res => {
@@ -220,7 +224,7 @@ export class AgregarHoraComponent implements OnInit {
    */
  
 
-  listarProjects(id) {
+  listarProjects() {
     this.projectosService.listar().subscribe(
       response => { 
         this.projects = response;
@@ -228,7 +232,7 @@ export class AgregarHoraComponent implements OnInit {
 
         } else {
           this.projects = response;
-          console.log(this.projects);
+          //console.log(this.projects);
         }
       },
       error => {
@@ -262,13 +266,13 @@ export class AgregarHoraComponent implements OnInit {
    * @param {*} idProject
    * @memberof AgregarHoraComponent
    */
-  listarFases(idProject)
+  listarFases()
   {
-    this.projectDetailService.listarPorProject(idProject).subscribe(
+    this.projectDetailService.listarPorProject(this.idProject).subscribe(
   		response => {
-        this.projectDetail = response;
-        console.log(this.projectDetail)
-  		},
+        this.projectDetail = response;  
+        console.log("listarfase",this.projectDetail)
+      },
   		error => {
   			console.log(<any>error);
   		}
@@ -292,6 +296,20 @@ export class AgregarHoraComponent implements OnInit {
     );
   }
 
+
+cualquiercosa:any=[];
+  consultar(id){
+    id == null
+    console.log(id);
+    this.projectDetailService.consultar(id).subscribe(
+      res=>{
+        console.log(res);
+        this.cualquiercosa = res;
+      },err=>{
+        console.log(err);
+      }
+    )
+  }
   /**
    * Registrar una nueva hora de trabajo
    *
@@ -300,20 +318,13 @@ export class AgregarHoraComponent implements OnInit {
   agregar()
   {
     let reghora = new RegHora();
-    console.log("Princarlos",this.variable_ap);
+    //console.log("Princarlos",this.variable_ap);
     reghora.idusuario = this.id;
-
     reghora.fechaini = this.formulario.value.fecha_inicial;
-
     reghora.fechafin = this.formulario.value.fecha_final;
-
     reghora.idactividad = this.formulario.value.actividad_principal;
-    
-    console.log(this.formulario.value.actividad_principal);
-
     reghora.actsec = this.formulario.value.actividad_secundaria;
-    reghora.proyecto = this.verProyectoo;
-    
+    console.log(reghora.idactividad)
     if(this.pestana == 'proyectos')
       reghora.tiporeg = 1;
     if(this.pestana == 'administrativas')
@@ -321,11 +332,14 @@ export class AgregarHoraComponent implements OnInit {
     if(this.pestana == 'novedades')
       reghora.tiporeg = 3;
 
-    reghora.idtiporeg = this.formulario.value.fase_proyecto;
-    console.log(this.formulario.value.fase_proyecto);
-    reghora.txttiporeg = this.txttiporeg();
-    console.log(this.txttiporeg);
-    console.log(this.verProyectoo)
+    reghora.idtiporeg = this.cualquiercosa.idprojectactivityu;
+    reghora.txttiporeg = this.cualquiercosa.wbs_element;
+
+    reghora.proyecto = this.proyecto;
+    
+    
+    console.log(this.prodetailid);
+
     console.log(reghora)
     this.generalService.abrirSpinner();
      this.reghoraService.agregar(reghora).subscribe(
@@ -348,11 +362,11 @@ export class AgregarHoraComponent implements OnInit {
    *
    * @memberof AgregarHoraComponent
    */
-  txttiporeg()
+ /*  txttiporeg()
   {
     if(this.projectDetail != null)
     {
-      if(this.projectDetail.projects_activities.length > 0 && this.pestana == 'proyectos')
+      if(this.projectDetail.projects_activities > 0 && this.pestana == 'proyectos')
       {
         let val = this.projectDetail.projects_activities.find(
           x => x.idprojectactivityu == this.formulario.value.fase_proyecto
@@ -365,7 +379,7 @@ export class AgregarHoraComponent implements OnInit {
       return null;
     }
     
-  }
+  } */
 
   /**
    *Obtener el proyecto de una actividad a partir de su ID
@@ -390,39 +404,5 @@ export class AgregarHoraComponent implements OnInit {
    
   }
 
-  //Métodos SelectBox para Actividades
-  selectActividad(id){
-    this.formulario.value.actividad_principal = id;
-  }
-  onFocusedActividad(e){
-    this.formulario.value.actividad_principal = null;
-  }
-  onChangeActividad(e){
-    console.log("Actividad",e)
-  }
-
-  //Métodos SelectBox Projects
-  selectProject(e)
-  {
-    this.listarFases(e.idprojects);
-    //this.formulario.value.proyecto = e.idprojects;
-  }
-  
-  onProject(e){/* this.formulario.value.proyecto = null; */}
-  onChangeProject(e){}
-
-  //Métodos para SelectBox Actividades Administrativas
-  selectActividadAdministrativa(e){
-    this.formulario.value.actividad_principal = e.id
-  }
-  onFocusedActividadAdministrativa(){
-    this.formulario.value.actividad_principal = null;
-  }
-  onChangeActividadAdministrativa(e){}
-
-  //Métodos SelectBox para Actividades Novedades
-  selectNovedad(e){this.formulario.value.actividad_principal = e.id}
-  onFocusedNovedad(e){this.formulario.value.actividad_principal = null;}
-  onChangeNovedad(e){}
 
 }

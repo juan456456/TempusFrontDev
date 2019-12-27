@@ -41,7 +41,7 @@ export class ReporteComponent implements OnInit {
     this.id = this.data.idusu;
     console.log(this.id);
     this.listar();
-    this.listartabla();
+    //this.listartabla();
     }
     
     
@@ -59,7 +59,7 @@ export class ReporteComponent implements OnInit {
       }
     )
   }
-
+/* 
 
   listartabla() {
     this.reporteService.listartabla().subscribe(
@@ -73,7 +73,7 @@ export class ReporteComponent implements OnInit {
         console.log(<any>error);
       }
     )
-  }
+  } */
 
   filtroFecha(){
     let fecha = {

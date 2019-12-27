@@ -21,6 +21,14 @@ export class ProjectDetailService {
   }
   */
 
+  
+  consultar(id) : any
+  {
+    const headers = new HttpHeaders(  ('application/json'));
+  	return this.http.get(this.url + 'consultar/' + id, {headers : headers}); 
+  }
+  
+
   listarPorProject(idProject)
   {
       const headers = new HttpHeaders(  ('application/json'));

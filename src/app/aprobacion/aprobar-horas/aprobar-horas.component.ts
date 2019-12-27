@@ -35,7 +35,7 @@ export class AprobarHorasComponent implements OnInit {
 
 
   listar() {
-    this.projectosService.listar(this.id).subscribe(
+    this.projectosService.listar().subscribe(
       response => {
         this.proyectos = response;
         if (this.proyectos == null) {
