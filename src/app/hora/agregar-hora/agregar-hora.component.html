@@ -74,9 +74,8 @@
 
                 <div class="uk-width-1-2@s" *ngIf="pestana == 'administrativas'">
                     <label class="uk-form-label" for="form-stacked-text">Actividad principal</label>
-                    <select class="uk-select" formControlName="actividad_principal" [(ngModel)]="idActividad" (ngModelChange)="verProyecto()">
-                        <option *ngFor="let actividad of actividades" value="{{actividad.id}}">
-                            {{actividad.Act_Nombre}}
+                    <select class="uk-select" formControlName="actividad_principal">
+                        <option *ngFor="let actividad of actividades" value="{{actividad.id}}">{{actividad.Act_Nombre}} 
                         </option>
                     </select>
                 </div>
@@ -85,6 +84,7 @@
                     <input class="uk-input" type="text" formControlName="actividad_secundaria" required />
                 </div>
             </li>
+
             <!-- Novedades -->
             <!--  <li class="uk-grid-small" uk-grid uk-grid>
                 <div class="uk-width-1-2@s" *ngIf="pestana == 'novedades'">

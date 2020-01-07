@@ -81,7 +81,7 @@ export class InicioComponent {
 
   ngOnInit() {
     this.data = JSON.parse(localStorage.getItem("logindata"));
-    this.id = this.data[0].idusu;
+    this.id = this.data.idusu;
     this.listar(this.id);
     this.listaradm(this.id);
   }
