@@ -80,6 +80,8 @@ public prodetailid;
      /*  this.proyecto = this.data.proyadmin;
       this.jefatura = this.data.idjefatura; */
       this.listarProjects();
+      this.listarTodo();
+
 
 
   }
@@ -92,7 +94,6 @@ public prodetailid;
   ngOnChanges()
   {
     this.actualizarFormulario();
-    this.listarTodo();
     this.listarActividadesAdministrativas(this.proyecto);
   }
 
@@ -141,10 +142,7 @@ public prodetailid;
     });
     this.listarActividadesAdministrativas(this.proyecto).subscribe(res => {
       this.actividadesAdministrativas = res;
-      this.listarActividadesJefatura(1, this.jefatura, this.proyecto).subscribe(res => {
-        this.actividadesAdministrativas = this.actividadesAdministrativas.concat(res);
         console.log(this.actividadesAdministrativas)
-      });
     });
   }
 

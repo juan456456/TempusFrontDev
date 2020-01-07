@@ -21,7 +21,6 @@
         <ul class="uk-subnav uk-subnav-pill uk-flex-center" uk-switcher>
             <li><a (click)="abrirPestana('proyectos')">Proyectos</a></li>
             <li><a (click)="abrirPestana('administrativas')">Administrativas</a></li>
-            <li><a (click)="abrirPestana('novedades')">Novedades</a></li>
         </ul>
         <ul class="uk-switcher uk-margin">
             <!-- Proyectos -->
@@ -75,7 +74,7 @@
                 <div class="uk-width-1-2@s" *ngIf="pestana == 'administrativas'">
                     <label class="uk-form-label" for="form-stacked-text">Actividad principal</label>
                     <select class="uk-select" formControlName="actividad_principal">
-                        <option *ngFor="let actividad of actividades" value="{{actividad.id}}">{{actividad.Act_Nombre}} 
+                        <option *ngFor="let acti of actividadesAdministrativas" value="{{acti.dependencia}}">{{acti.descripcion}} 
                         </option>
                     </select>
                 </div>

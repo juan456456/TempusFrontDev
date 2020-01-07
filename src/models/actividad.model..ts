@@ -7,4 +7,7 @@ export class Actividad
     Act_Nombre : string;
     Act_TipoAct_id : number;
     proyecto : string;
+    descripcion : string;
+    dependencia: number;
+
 }

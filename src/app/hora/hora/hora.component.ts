@@ -43,6 +43,14 @@ export class HoraComponent implements OnInit {
     modal.show(); 
   }
 
+  eventSelectDate(event)
+  {
+    this.fecha_inicial = this.datePipe.transform(event.start, 'yyyy-MM-dd hh:mm:ss');
+    this.fecha_final = this.datePipe.transform(event.end, 'yyyy-MM-dd hh:mm:ss');
+    var modal = UIkit.modal("#modal-agregar-date");
+    modal.show(); 
+  }
+
   selectEvent(item) {}
   onChangeSearch(val: string) {}
   onFocused(e){}
