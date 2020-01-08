@@ -1,33 +1,35 @@
 <div uk-sticky class="uk-navbar-container tm-navbar-container uk-active">
-  <div class="uk-container uk-container-expand uk-float">
-    <nav uk-navbar>
-      <div class="uk-navbar-left uk-border">
-        <a id="sidebar_toggle" class="uk-navbar-toggle" uk-navbar-toggle-icon></a>
-        <a routerLink="" class="uk-navbar-item uk-logo">
-          <img src="/assets/simbolo.png">
-          <img src="/assets/logo_nec_3.png">
-          <img src="/assets/logo_letsgonec_2.png" style="margin-left: 50px">
-        </a>
-      </div>
-      <div class="uk-navbar-right uk-light">
-        <ul class="uk-navbar-nav">
-          <li class="uk-active">
-              <a href="#">
-                  <strong style="margin-right: 10px; color: rgb(124, 124, 124);" class="uk-titulo">Bienvenido: {{data.nombre}}</strong>
-                  <span uk-icon="chevron-down"></span>
-               </a>
-
-            <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
-              <ul class="uk-nav uk-navbar-dropdown-nav">
-                <li class="uk-nav-header">Opciones</li>
-                <li><a routerLink="/clave" routerLinkActive="active"> <i class="fas fa-user-edit"></i> Editar Perfil</a></li>
-                <li class="uk-nav-header">Acciones</li>
-                <li><a (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
-              </ul>
+    <div class="uk-container uk-container-expand uk-float">
+        <nav uk-navbar>
+            <div class="uk-navbar-left uk-border">
+                <a id="sidebar_toggle" class="uk-navbar-toggle" uk-navbar-toggle-icon></a>
+                <a routerLink="" class="uk-navbar-item uk-logo">
+                    <img src="assets/simbolo.png">
+                    <img src="assets/logo_nec_3.png">
+                    <img src="assets/logo_letsgonec_2.png" style="margin-left: 50px">
+                </a>
             </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
+            <div class="uk-navbar-right uk-light">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active">
+                        <a href="#">
+                            <strong style="margin-right: 10px; color: rgb(124, 124, 124);" class="uk-titulo">Bienvenido: {{data.nombre}}</strong>
+                            <span uk-icon="chevron-down"></span>
+                        </a>
+
+                        <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-nav-header">Opciones</li>
+                                <li>
+                                    <a routerLink="/clave" routerLinkActive="active"> <i class="fas fa-user-edit"></i> Editar Perfil</a>
+                                </li>
+                                <li class="uk-nav-header">Acciones</li>
+                                <li><a (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </div>
