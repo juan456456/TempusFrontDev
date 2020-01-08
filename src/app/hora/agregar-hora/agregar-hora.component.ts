@@ -143,7 +143,6 @@ public prodetailid;
     });
     this.listarActividadesAdministrativas(this.proyecto).subscribe(res => {
       this.actividadesAdministrativas = res;
-        console.log(this.actividadesAdministrativas)
     });
   }
 
@@ -182,7 +181,6 @@ public prodetailid;
           if (this.actividades == null) {
           } else {
             this.actividades = response;
-            console.log(this.actividades);
           }
         },
         error => {
@@ -231,7 +229,7 @@ public prodetailid;
 
         } else {
           this.projects = response;
-          //console.log(this.projects);
+          
         }
       },
       error => {
@@ -270,7 +268,6 @@ public prodetailid;
     this.projectDetailService.listarPorProject(this.idProject).subscribe(
   		response => {
         this.projectDetail = response;  
-        console.log("listarfase",this.projectDetail)
       },
   		error => {
   			console.log(<any>error);
@@ -289,7 +286,6 @@ public prodetailid;
   		response => {
         if(response != null) {
           this.actividadesNovedades = response;
-          console.log("Novedades", this.actividadesNovedades);  
         }
       },
   		error => {

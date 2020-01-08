@@ -16,7 +16,7 @@ export class UsuarioService {
 
   listar(): any
     {
-        const headers = new HttpHeaders(  ('aplication/json'));
+        const headers = new HttpHeaders(('aplication/json'));
         return this.http.get(this.url + 'listar', {headers : headers});
     }
 

@@ -13,15 +13,6 @@ export class ProjectDetailService {
 
   url : any = GeneralService.WS_URL + "projectdetail/";
   
-  /*
-  listar() : any
-  {
-    const headers = new HttpHeaders(  ('application/json'));
-  	return this.http.get(this.url + 'listar', {headers : headers}); 
-  }
-  */
-
-  
   consultar(id) : any
   {
     const headers = new HttpHeaders(  ('application/json'));

@@ -89,7 +89,6 @@ export class AgregarNovedadesComponent implements OnInit {
   		response => {
         if(response != null) {
           this.actividadesNovedades = response;
-          console.log("Novedades", this.actividadesNovedades);  
         }
       },
   		error => {
@@ -103,10 +102,8 @@ export class AgregarNovedadesComponent implements OnInit {
 
   consultarNovedades(id){
     id == null
-    console.log(this.idnovedad);
     this.actividadService.consultarNovedad(this.idnovedad).subscribe(
       res=>{
-        console.log(res);
         this.cualquiercosa = res;
       },err=>{
         console.log(err);
@@ -117,26 +114,19 @@ export class AgregarNovedadesComponent implements OnInit {
   agregar()
   {
     let reghora = new RegHora();
-    //console.log("Princarlos",this.variable_ap);
     reghora.idusuario = this.id;
     reghora.fechaini = this.formulario.value.fecha_inicial;
     reghora.fechafin = this.formulario.value.fecha_final;
     reghora.idactividad = this.formulario.value.actividad_principal;
     reghora.actsec = this.cualquiercosa.descripcion;
-    console.log(reghora.idactividad)
    
     if(this.pestana == 'novedades')
       reghora.tiporeg = 3;
 
     reghora.idtiporeg = this.cualquiercosa.dependencia;
     reghora.txttiporeg = this.proyecto + this.cualquiercosa.txttiporeg;
-
     reghora.proyecto = this.proyecto;
-    
-    
-    console.log(this.projectDetail);
 
-    console.log(reghora)
     this.generalService.abrirSpinner();
      this.reghoraService.agregar(reghora).subscribe(
   		response => {
@@ -148,10 +138,5 @@ export class AgregarNovedadesComponent implements OnInit {
   			console.log(<any>error);
   		}
     ); 
-    
-/*    alert(reghora.tiporeg)
- */  }
-
-  
-
+}
 }

@@ -21,28 +21,6 @@ export class ReporteService {
         return this.http.get(this.url + 'listar/' + id, {headers : headers});
     }
 
-
-    editar(form): any
-    {
-    const headers = new HttpHeaders(('aplication/json'));
-    const data = form;
-    return this.http.put(this.url + 'actualizar', data, { headers : headers });
-    }
-
-
-    eliminar(id): any
-    {
-        const headers = new HttpHeaders(('aplication/json'));
-        return this.http.delete(this.url + 'eliminar/' + id, {headers : headers});
-    }
-
-
-    listartabla(): any
-    {
-        const headers = new HttpHeaders(('aplication/json'));
-        return this.http.get(this.url + 'listartabla', {headers : headers});
-    }
-
     filtrarxFechas(fecha_inicial, fecha_final): any
     {
         const headers = new HttpHeaders(('aplication/json'));

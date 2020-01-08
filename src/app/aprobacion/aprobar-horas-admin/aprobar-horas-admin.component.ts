@@ -23,7 +23,6 @@ export class AprobarHorasAdminComponent implements OnInit {
   ngOnInit() {
     this.data = JSON.parse(localStorage.getItem("logindata"));
     this.id = this.data.idusu;
-    console.log(this.id);
     this.listar();
   }
 
@@ -35,8 +34,7 @@ export class AprobarHorasAdminComponent implements OnInit {
 
         } else {
           this.usuarios = response;
-          console.log(this.usuarios);
-        }
+                }
       },
       error => {
         console.log(<any>error);
@@ -51,8 +49,6 @@ export class AprobarHorasAdminComponent implements OnInit {
         if (this.usuarios2 == null) {
         } else {
           this.usuarios2 = response;
-          console.log(this.usuarios2);
-          console.log(this.idcolaborador);
         }
       },
       error => {

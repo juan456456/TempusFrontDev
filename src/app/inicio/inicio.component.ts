@@ -18,6 +18,9 @@ export class InicioComponent {
   public fechasADM: any = [];
   public horasADM: any = [];
   
+
+  //RESUMEN REGISTRO DE HORAS DE PROYECTOS
+
   public barChartOptions: ChartOptions = {
     responsive: true,
     // Utilizamos estas estructuras vacías como marcadores de posición para temas dinámicos.
@@ -30,7 +33,7 @@ export class InicioComponent {
     }
   };
 
-  public barChartLabels: Label[] = this.fechas ;
+  public barChartLabels: Label[] = this.fechas ; 
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
 
@@ -49,7 +52,7 @@ export class InicioComponent {
     },
   ]
 
-  // HORAS ADMINISTRATIVAS
+  // RESUMEN REGISTRO DE HORAS ADMINISTRATIVAS
 
   public barChartOptionsAdm: ChartOptions = {
     responsive: true,
@@ -86,6 +89,7 @@ export class InicioComponent {
     this.listaradm(this.id);
   }
 
+//Listar Horas de proyectos
 
   listar(id) {
     this.inicioService.listar(id)
@@ -102,7 +106,6 @@ export class InicioComponent {
            this.horas.push(element.canthoras)
          });
 
-          console.log(this.inicio);
       }
     },
       error => {        
@@ -111,6 +114,9 @@ export class InicioComponent {
     )
   }
 
+
+  // Listar horas administrativas
+  
   listaradm(id) {
     this.inicioService.listaradm(id)
     .subscribe(
@@ -125,8 +131,7 @@ export class InicioComponent {
          this.inicio.forEach(element => {
            this.horasADM.push(element.canthoras)
          });
-          console.log(this.horasADM)
-          console.log(this.inicio);
+
       }
     },
       error => {        
@@ -134,14 +139,4 @@ export class InicioComponent {
     }
     )
   }
-
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
 }

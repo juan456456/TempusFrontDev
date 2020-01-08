@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit()
   {
     this.data = JSON.parse(localStorage.getItem("logindata"));
-    console.log(this.data);
     var a = this.data.id;
     
   }

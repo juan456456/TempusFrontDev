@@ -39,9 +39,7 @@ export class ReporteComponent implements OnInit {
 
     this.data = JSON.parse(localStorage.getItem("logindata"));
     this.id = this.data.idusu;
-    console.log(this.id);
     this.listar();
-    //this.listartabla();
     }
     
     
@@ -51,7 +49,6 @@ export class ReporteComponent implements OnInit {
       response => {
         if (response != null) {
           this.reportes = response;
-          console.log(this.reportes);
       }
       },
       error => {
@@ -59,28 +56,13 @@ export class ReporteComponent implements OnInit {
       }
     )
   }
-/* 
 
-  listartabla() {
-    this.reporteService.listartabla().subscribe(
-      response => {
-        if (response != null) {
-          this.objetos =response;
-          // console.log(this.objetos);
-        }
-      },
-      error => {
-        console.log(<any>error);
-      }
-    )
-  } */
 
   filtroFecha(){
     let fecha = {
       "fecha_inicial": this.formulario.value.fecha_inicial,
       "fecha_final": this.formulario.value.fecha_final
     };
-    console.log(fecha);
     
     if(fecha.fecha_inicial > fecha.fecha_final) {
       GeneralService.ABRIR_MENSAJE("La Fecha Inicial no puede ser matoy que la fecha Final", "error");
@@ -99,26 +81,5 @@ export class ReporteComponent implements OnInit {
       )
     }
     this.listarReporte = false;
-  }
-
-  
-  eliminar(id)
-  {
-    GeneralService.ABRIR_CONFIRMACION().subscribe(
-      response => {
-        this.reporteService.eliminar(id).subscribe(
-          response => {
-            GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "succes");
-            
-          },
-          error => {
-            console.log(<any>error);
-          }
-        );
-      },
-      error => {
-        console.log(<any>error);
-      }
-    );
   }
 }
