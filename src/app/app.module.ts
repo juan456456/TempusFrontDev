@@ -44,6 +44,7 @@ import { RegHoraService } from '../services/reghora.service';
 import { UsuarioService } from 'src/services/usuario.service';
 import { LoginService } from '../services/login.service';
 import { InicioService } from '../services/inicio.service';
+import { AgregarNovedadesComponent } from './hora/agregar-novedades/agregar-novedades.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { InicioService } from '../services/inicio.service';
     AprobarHorasComponent,
     AprobarHorasAdminComponent,
     AprobacionComponent,
+    AgregarNovedadesComponent,
   ],
 
   imports: [

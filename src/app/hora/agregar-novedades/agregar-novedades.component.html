@@ -1,0 +1,42 @@
+<!-- Proyectos y horas administrativas -->
+<form class="uk-grid-small" uk-grid uk-grid [formGroup]="formulario" (ngSubmit)="agregar()">
+
+    <div class="uk-width-1-2@s" style="text-align: center">
+        <label class="uk-form-label" for="form-stacked-text">Fecha inicial </label>
+        <div class="uk-inline">
+            <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+            <input class="uk-input" type="text" formControlName="fecha_inicial" readonly />
+        </div>
+    </div>
+
+    <div class="uk-width-1-2@s" style="text-align: center">
+        <label class="uk-form-label" for="form-stacked-text">Fecha final </label>
+        <div class="uk-inline">
+            <span class="uk-form-icon" uk-icon="icon: calendar"></span>
+            <input class="uk-input" type="text" formControlName="fecha_final" readonly />
+        </div>
+    </div>
+
+    <div class="uk-width-1-1@s">
+        <ul class="uk-subnav uk-subnav-pill uk-flex-center" uk-switcher>
+            <li><a (click)="abrirPestana('novedades')">Novedades</a></li>
+        </ul>
+    </div>
+    <!-- Novedades -->
+    <li class="uk-grid-large" uk-grid uk-grid>
+        <div class="uk-width-1-1@s" *ngIf="pestana == 'novedades'">
+            <label class="uk-form-label" for="form-stacked-text">Novedad</label>
+            <select class="uk-select" formControlName="actividad_principal">
+          <option *ngFor="let actividadesNovedades of actividadesNovedades" value="{{actividadesNovedades.id}}">{{actividadesNovedades.descripcion}} 
+          </option>
+      </select>
+        </div>
+    </li>
+
+    <hr />
+    <div class="uk-width-1-1@s" style="text-align: center">
+        <button type="submit" class="uk-button uk-button-primary" style="width: 50%">Agregar</button>
+    </div>
+
+</form>
+<!-- Fin Horas Administrativas y proyectos -->

@@ -81,6 +81,7 @@ public prodetailid;
       this.jefatura = this.data.idjefatura; */
       this.listarProjects();
       this.listarTodo();
+      this.listarNovedades(this.proyecto);
 
 
 
@@ -282,17 +283,22 @@ public prodetailid;
    *
    * @memberof AgregarHoraComponent
    */
-  listarNovedades()
+  listarNovedades(proyecto)
   {
-    this.actividadService.listarNovedades().subscribe(
+    this.actividadService.listarNovedades(proyecto).subscribe(
   		response => {
-        this.actividadesNovedades = response;
-  		},
+        if(response != null) {
+          this.actividadesNovedades = response;
+          console.log("Novedades", this.actividadesNovedades);  
+        }
+      },
   		error => {
   			console.log(<any>error);
   		}
     );
   }
+
+
 
 
 cualquiercosa:any=[];

@@ -25,10 +25,10 @@ export class ActividadService {
   	return this.http.get(this.url + 'listarxjefatura/' + estado + '/' + jefatura + '/' + proyecto, {headers : headers}); 
   }
 
-  listarNovedades(): any
+  listarNovedades(proyecto): any
   {
     const headers = new HttpHeaders(  ('application/json'));
-  	return this.http.get(this.url + 'listarnovedades', {headers : headers}); 
+  	return this.http.get(this.url + 'listarnovedades/' + proyecto, {headers : headers}); 
   }
 
   listarAdministrativas(proyecto) : any 
