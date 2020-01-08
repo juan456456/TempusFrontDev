@@ -37,4 +37,10 @@ export class ActividadService {
   	return this.http.get(this.url + 'listaradministrativas/' + proyecto, {headers : headers}); 
   }
 
+  consultarNovedad(id) : any
+  {
+    const headers = new HttpHeaders(  ('application/json'));
+  	return this.http.get(this.url + 'consultarnovedades/' + id, {headers : headers}); 
+  }
+
 }

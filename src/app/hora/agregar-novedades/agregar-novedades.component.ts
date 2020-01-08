@@ -30,10 +30,11 @@ export class AgregarNovedadesComponent implements OnInit {
   public id :any;   
   public reghora : RegHora;
   public data: any = [];
-  public pestana : any = 'proyectos';
+  public pestana : any = 'novedades';
   public estado: any;
   public proyecto: any;
   public projectDetail : any = null;
+  public idnovedad : any;
 
   public jefatura: any;
   @Input() fecha_inicial : any; 
@@ -63,16 +64,6 @@ export class AgregarNovedadesComponent implements OnInit {
       actividad_principal : ['', Validators.required]
     };
 
-    if(this.pestana == 'proyectos')
-    {
-      form['fase_proyecto'] = ['', Validators.required];
-      form['actividad_secundaria'] = ['', Validators.required];
-    }
-    if(this.pestana == 'administrativas')
-    {
-      form['fase_proyecto'] = [null];
-      form['actividad_secundaria'] = ['', Validators.required];
-    } 
     if(this.pestana == 'novedades')
     {
       form['actividad_secundaria'] = [null];
@@ -109,10 +100,11 @@ export class AgregarNovedadesComponent implements OnInit {
 
 
   cualquiercosa:any=[];
-  consultar(id){
+
+  consultarNovedades(id){
     id == null
-    console.log(id);
-    this.projectDetailService.consultar(id).subscribe(
+    console.log(this.idnovedad);
+    this.actividadService.consultarNovedad(this.idnovedad).subscribe(
       res=>{
         console.log(res);
         this.cualquiercosa = res;
@@ -130,17 +122,14 @@ export class AgregarNovedadesComponent implements OnInit {
     reghora.fechaini = this.formulario.value.fecha_inicial;
     reghora.fechafin = this.formulario.value.fecha_final;
     reghora.idactividad = this.formulario.value.actividad_principal;
-    reghora.actsec = this.formulario.value.actividad_secundaria;
+    reghora.actsec = this.cualquiercosa.descripcion;
     console.log(reghora.idactividad)
-    if(this.pestana == 'proyectos')
-      reghora.tiporeg = 1;
-    if(this.pestana == 'administrativas')
-      reghora.tiporeg = 2;
+   
     if(this.pestana == 'novedades')
       reghora.tiporeg = 3;
 
-    reghora.idtiporeg = this.cualquiercosa.idprojectactivityu;
-    reghora.txttiporeg = this.cualquiercosa.wbs_element;
+    reghora.idtiporeg = this.cualquiercosa.dependencia;
+    reghora.txttiporeg = this.proyecto + this.cualquiercosa.txttiporeg;
 
     reghora.proyecto = this.proyecto;
     
