@@ -12,6 +12,8 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ChartsModule } from 'ng2-charts';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 //Pages
 import { LoginComponent } from './login/login.component';
@@ -78,7 +80,8 @@ import { AgregarNovedadesComponent } from './hora/agregar-novedades/agregar-nove
     NgxSpinnerModule,
     AngularEditorModule,
     NgxPaginationModule,
-    ChartsModule
+    ChartsModule,
+    Ng2SearchPipeModule
   ],
 
   providers: [
