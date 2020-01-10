@@ -10,6 +10,7 @@ import { RegHoraService } from 'src/services/reghora.service';
 import { GeneralService } from 'src/services/general.service';
 import { Observable } from 'rxjs';
 import {ProyectosService} from "src/services/proyectos.service";
+import { EmitterService } from 'src/services/emitter.service';
 
 @Component({
   selector: 'app-agregar-hora',
@@ -26,6 +27,7 @@ export class AgregarHoraComponent implements OnInit {
     private reghoraService : RegHoraService,
     private generalService : GeneralService,
     private projectosService : ProyectosService,
+    private emmiterService: EmitterService
 
   ) { }
 
@@ -70,7 +72,6 @@ public prodetailid;
   ngOnInit()
   {
     this.data = JSON.parse(localStorage.getItem("logindata"));
-    console.log(this.data);
       this.id = this.data.idusu;
       this.estado = this.data.estado;
       this.proyecto = this.data.proyadmin;
@@ -292,10 +293,8 @@ cualquiercosa:any=[];
 
   consultar(id){
     id == null
-    console.log(id);
     this.projectDetailService.consultar(id).subscribe(
       res=>{
-        console.log(res);
         this.cualquiercosa = res;
       },err=>{
         console.log(err);
@@ -332,6 +331,8 @@ cualquiercosa:any=[];
   		response => {
         this.generalService.cerrarSpinner();
         GeneralService.ABRIR_MENSAJE("La hora se ha cargado correctamente", "success");
+        this.listarTodo();
+        this.emmiterService.onRefreshEventsHoraComponent();
   		},
   		error => {
         GeneralService.ABRIR_MENSAJE("Verificar información", "error");

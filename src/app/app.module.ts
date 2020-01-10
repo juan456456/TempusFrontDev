@@ -47,6 +47,7 @@ import { UsuarioService } from 'src/services/usuario.service';
 import { LoginService } from '../services/login.service';
 import { InicioService } from '../services/inicio.service';
 import { AgregarNovedadesComponent } from './hora/agregar-novedades/agregar-novedades.component';
+import { EmitterService } from '../services/emitter.service';
 
 //permisos
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -99,7 +100,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     RegHoraService,
     LoginService,
     UsuarioService,
-    InicioService
+    InicioService,
+    EmitterService
   ],
   
   bootstrap: [AppComponent]

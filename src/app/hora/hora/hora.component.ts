@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for selectable
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { RegHoraService } from 'src/services/reghora.service';
 import { Calendar } from '@fullcalendar/core';
-
+import { EmitterService } from 'src/services/emitter.service';
 import { DatePipe } from '@angular/common';
 declare var UIkit: any;
 
@@ -15,7 +16,10 @@ declare var UIkit: any;
 export class HoraComponent implements OnInit {
 
   constructor(
-    private datePipe : DatePipe
+    private datePipe : DatePipe,
+    private reghoraService : RegHoraService,
+    private emmiterService: EmitterService
+
   ) { }
 
   public calendarPlugins = [timeGridPlugin, interactionPlugin, dayGridPlugin];
@@ -31,6 +35,28 @@ export class HoraComponent implements OnInit {
    * @memberof HoraComponent
    */
   ngOnInit(){
+    this.listarNovedades(269);
+    if (this.emmiterService.subsVar==undefined) {    
+      this.emmiterService.subsVar = this.emmiterService.    
+      invokeHoraRefreshEvents.subscribe((name:string) => {    
+        let data = JSON.parse(localStorage.getItem("logindata"));
+        this.listarNovedades(data.idusu);    
+      });    
+    }  
+  }
+
+  listarNovedades(idusu)
+  {
+    this.reghoraService.listarHorasRegistradas(idusu).subscribe(
+  		response => {
+        if(response != null) {
+          this.events = response;
+        }
+      },
+  		error => {
+  			console.log(<any>error);
+  		}
+    );
   }
 
   /**
@@ -46,13 +72,13 @@ export class HoraComponent implements OnInit {
     var modal = UIkit.modal("#modal-agregar");
     modal.show();
 
-    this.events.push({
+    /* this.events.push({
       title: 'Horas registradas', 
       start: event.start,
       end: event.end,
     })
 
-    console.log(this.events);
+    console.log(this.events); */
   }
 
 
