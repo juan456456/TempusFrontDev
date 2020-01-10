@@ -13,6 +13,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ChartsModule } from 'ng2-charts';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { dateformat  } from 'dateformat';
+
+
+
 
 
 //Pages
@@ -87,6 +91,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     NgxPaginationModule,
     ChartsModule,
     Ng2SearchPipeModule,
+    dateformat,
     NgxPermissionsModule.forRoot(),
 
   ],

@@ -18,13 +18,13 @@
 
                 <div>
                     <div class="uk-card uk-card-default uk-card-body">
-                        <full-calendar id="calendar1" defaultView="timeGridDay" [plugins]="calendarPlugins" [events]="events" [selectable]="true" (select)="eventSelect($event)" deepChangeDetection="true"></full-calendar>
+                        <full-calendar id="calendar1" defaultView="timeGridDay" [plugins]="calendarPlugins" (eventClick)="selectEvent($event)" [events]="events" [selectable]="true" (select)="eventSelect($event)" deepChangeDetection="true"></full-calendar>
                     </div>
                 </div>
 
                 <div>
                     <div class="uk-card uk-card-default uk-card-body">
-                        <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="events" [selectable]="true" (select)="eventSelectDate($event)" deepChangeDetection="true"></full-calendar>
+                        <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="eventsN" [selectable]="true" (select)="eventSelectDate($event)" deepChangeDetection="true"></full-calendar>
                     </div>
                 </div>
 

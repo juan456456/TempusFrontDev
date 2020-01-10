@@ -25,6 +25,12 @@ export class RegHoraService {
     const headers = new HttpHeaders(  ('application/json'));
   	return this.http.get(this.url + 'horasregistradas' + '/'+ idusu, {headers : headers}); 
   }
+
+  listarHorasRegistradasN(idusu) : any
+  {
+    const headers = new HttpHeaders(  ('application/json'));
+  	return this.http.get(this.url + 'horasregistradasnovedades' + '/'+ idusu, {headers : headers}); 
+  }
   
   agregar(data : RegHora) : any
   {
