@@ -30,6 +30,7 @@ export class ReporteComponent implements OnInit {
   public listarReporte :  boolean;
   public id :  any;
   public buscador : FormGroup;  
+  public buscar;
 
 
   ngOnInit()

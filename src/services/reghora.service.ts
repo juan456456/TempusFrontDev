@@ -23,7 +23,6 @@ export class RegHoraService {
   agregar(data : RegHora) : any
   {
     const headers = new HttpHeaders(  ('application/json'));
-    console.log(data)
     return this.http.post(this.url + 'insertar', data, {headers : headers}); 
   }
 

@@ -48,6 +48,10 @@ import { LoginService } from '../services/login.service';
 import { InicioService } from '../services/inicio.service';
 import { AgregarNovedadesComponent } from './hora/agregar-novedades/agregar-novedades.component';
 
+//permisos
+import { NgxPermissionsModule } from 'ngx-permissions';
+
+
 
 @NgModule({
   declarations: [
@@ -81,7 +85,9 @@ import { AgregarNovedadesComponent } from './hora/agregar-novedades/agregar-nove
     AngularEditorModule,
     NgxPaginationModule,
     ChartsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPermissionsModule.forRoot(),
+
   ],
 
   providers: [

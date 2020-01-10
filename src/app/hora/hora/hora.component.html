@@ -18,7 +18,7 @@
 
                 <div>
                     <div class="uk-card uk-card-default uk-card-body">
-                        <full-calendar defaultView="timeGridDay" [plugins]="calendarPlugins" [events]="[{ title: 'event 1', date: '2019-04-01' },{ title: 'event 2', date: '2019-04-02' }]" [selectable]="true" (select)="eventSelect($event)"></full-calendar>
+                        <full-calendar id="calendar1" defaultView="timeGridDay" [plugins]="calendarPlugins" [events]="events" [selectable]="true" (select)="eventSelect($event)" deepChangeDetection="true"></full-calendar>
                     </div>
                 </div>
 
@@ -63,4 +63,3 @@
             <app-agregar-novedades [fecha_inicial]="fecha_inicial" [fecha_final]="fecha_final"></app-agregar-novedades>
         </div>
     </div>
-</div>

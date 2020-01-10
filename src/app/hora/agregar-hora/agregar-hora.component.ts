@@ -10,7 +10,6 @@ import { RegHoraService } from 'src/services/reghora.service';
 import { GeneralService } from 'src/services/general.service';
 import { Observable } from 'rxjs';
 import {ProyectosService} from "src/services/proyectos.service";
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-agregar-hora',
@@ -50,8 +49,6 @@ export class AgregarHoraComponent implements OnInit {
   public idActividad : any;
   public verProyectoo : any;
   public idProject : any;
- /*  public proyecto : any;
-  public jefatura : any;  */ 
   public estado : any;  
   public  : any;
 
@@ -73,17 +70,14 @@ public prodetailid;
   ngOnInit()
   {
     this.data = JSON.parse(localStorage.getItem("logindata"));
+    console.log(this.data);
       this.id = this.data.idusu;
       this.estado = this.data.estado;
       this.proyecto = this.data.proyadmin;
       this.jefatura = this.data.idjefatura;
-     /*  this.proyecto = this.data.proyadmin;
-      this.jefatura = this.data.idjefatura; */
       this.listarProjects();
       this.listarTodo();
       this.listarNovedades(this.proyecto);
-
-
 
   }
 
@@ -294,10 +288,8 @@ public prodetailid;
     );
   }
 
-
-
-
 cualquiercosa:any=[];
+
   consultar(id){
     id == null
     console.log(id);
@@ -318,13 +310,11 @@ cualquiercosa:any=[];
   agregar()
   {
     let reghora = new RegHora();
-    //console.log("Princarlos",this.variable_ap);
     reghora.idusuario = this.id;
     reghora.fechaini = this.formulario.value.fecha_inicial;
     reghora.fechafin = this.formulario.value.fecha_final;
     reghora.idactividad = this.formulario.value.actividad_principal;
     reghora.actsec = this.formulario.value.actividad_secundaria;
-    console.log(reghora.idactividad)
     if(this.pestana == 'proyectos')
       reghora.tiporeg = 1;
     if(this.pestana == 'administrativas')
@@ -336,11 +326,7 @@ cualquiercosa:any=[];
     reghora.txttiporeg = this.cualquiercosa.wbs_element;
 
     reghora.proyecto = this.proyecto;
-    
-    
-    console.log(this.prodetailid);
 
-    console.log(reghora)
     this.generalService.abrirSpinner();
      this.reghoraService.agregar(reghora).subscribe(
   		response => {
@@ -352,9 +338,8 @@ cualquiercosa:any=[];
   			console.log(<any>error);
   		}
     ); 
-    
-/*    alert(reghora.tiporeg)
- */  }
+
+      }
 
   
   /**
@@ -362,24 +347,6 @@ cualquiercosa:any=[];
    *
    * @memberof AgregarHoraComponent
    */
- /*  txttiporeg()
-  {
-    if(this.projectDetail != null)
-    {
-      if(this.projectDetail.projects_activities > 0 && this.pestana == 'proyectos')
-      {
-        let val = this.projectDetail.projects_activities.find(
-          x => x.idprojectactivityu == this.formulario.value.fase_proyecto
-        );
-        return val.wbs_element;
-      }else{
-        return null;
-      }
-    }else{
-      return null;
-    }
-    
-  } */
 
   /**
    *Obtener el proyecto de una actividad a partir de su ID
@@ -391,18 +358,14 @@ cualquiercosa:any=[];
 
       if(this.actividades.length > 0 && this.pestana == 'administrativas')
     {
-      console.log(this.actividadesAdministrativas)
-      console.log(this.idActividad)
       let val = this.actividadesAdministrativas.find(
         x => x.id == this.idActividad
       );
-      console.log(val);
       this.verProyectoo = val.proyecto;
     }else{
       return null;
     }  
    
   }
-
 
 }

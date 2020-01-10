@@ -28,19 +28,19 @@
     <div class="uk-overflow-auto" style="padding: 30px">
         <nav class="uk-navbar-container searchinput" style="background-color: aliceblue;" uk-navbar>
             <form style="text-align: center" class="uk-grid-small " uk-grid [formGroup]="buscador">
-              <div class="uk-navbar-left">
-                <div class="uk-navbar-item">
-                  <div class="uk-search uk-search-navbar">
-                    <span uk-search-icon></span>
-                    <input class="uk-search-input" type="text" [(ngModel)]="buscar" formControlName= "buscar" placeholder="Buscar..."> 
-                    
-                  </div>
-                </div>
-              </div>
-            </form>
-          </nav>
+                <div class="uk-navbar-left">
+                    <div class="uk-navbar-item">
+                        <div class="uk-search uk-search-navbar">
+                            <span uk-search-icon></span>
+                            <input class="uk-search-input" type="text" [(ngModel)]="buscar" formControlName="buscar" placeholder="Buscar...">
 
-          <button class="uk-button uk-button-primary" style="margin-top: 10px;" (click)="exportarExcel()"><i class="far fa-file-excel"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </nav>
+
+        <button class="uk-button uk-button-primary" style="margin-top: 10px;" (click)="exportarExcel()"><i class="far fa-file-excel"></i></button>
 
         <table class="uk-table uk-table-small uk-table-divider" id="tablareporte">
             <tbody>
@@ -60,7 +60,7 @@
                     <td>{{reporte.fechafin}}</td>
                     <td>{{reporte.canthoras}}</td>
                     <td *ngIf="reporte.autorizado ==1"> Aprobado</td>
-                     <td *ngIf="reporte.autorizado ==0"> No Aprobado</td>  
+                    <td *ngIf="reporte.autorizado ==0"> No Aprobado</td>
                 </tr>
             </tbody>
         </table>
