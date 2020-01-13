@@ -114,18 +114,59 @@ export class HoraComponent implements OnInit {
 
   selectEvent(event) {
     console.log(event)
-  
+
     var arraySplt = event.el.text.split("-");
     var horaini = arraySplt[0].trim();
-    var horafin = arraySplt[1].split("0")[0]+"0".trim();
-    var fechaini = event.el.fcSeg.start;
-    var fecha1= formatDate(fechaini, 'dd-MM-yyyy','')
+    var horafin = arraySplt[1].split(/[a-zA-Z]/)[0].trim();
+    var fechaconvertir = event.el.fcSeg.start;
 
-    console.log(fecha1);
+    
+ 
+
+    if(horaini.length <= 4){
+
+      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0'+ horaini);
+      console.log(fechaini);
+      var x = this.datePipe.transform(fechaini,'HH:mm:ss');
+      console.log("erer",x);
+    }else {
+
+      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + horaini);
+      console.log(fechaini);    }
+
+    if(horafin.length == 4){
+
+      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0'+ horafin);
+      console.log(fechafin);
+
+    }else {
+
+      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + horafin);
+      console.log(fechafin);
+    }
+
+    let login = JSON.parse(localStorage.getItem("logindata"));
+    let data = {
+      'idusu' : login.idusu,
+      'fechaini' : fechaini,
+      'fechafin': fechafin
+    };
+
+    console.log(data);
+
+    this.reghoraService.eliminar(data).subscribe(
+  		response => {
+        if(response != null) {
+          console.log(response);
+        }
+      },
+  		error => {
+  			console.log(<any>error);
+  		}
+    );
+
 
   }
-
-  
 
   onChangeSearch(val: string) {}
   onFocused(e){}
