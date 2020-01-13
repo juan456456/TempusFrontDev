@@ -121,14 +121,12 @@ export class HoraComponent implements OnInit {
     var fechaconvertir = event.el.fcSeg.start;
 
     
- 
-
-    if(horaini.length <= 4){
+    if(horaini.length == 4){
 
       var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0'+ horaini);
       console.log(fechaini);
-      var x = this.datePipe.transform(fechaini,'HH:mm:ss');
-      console.log("erer",x);
+      /* var x = this.datePipe.transform(horaini,'HH:mm:ss');
+      console.log("erer",x); */
     }else {
 
       var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + horaini);
