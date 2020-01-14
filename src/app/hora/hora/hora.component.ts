@@ -4,10 +4,12 @@ import interactionPlugin from '@fullcalendar/interaction'; // for selectable
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { RegHoraService } from 'src/services/reghora.service';
 import { Calendar } from '@fullcalendar/core';
+import { GeneralService } from 'src/services/general.service';
 import { EmitterService } from 'src/services/emitter.service';
 import { DatePipe } from '@angular/common';
 import { formatDate } from '@angular/common';
 import * as $ from 'jquery';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { from } from 'rxjs';
 declare var UIkit: any;
@@ -22,7 +24,8 @@ export class HoraComponent implements OnInit {
   constructor(
     private datePipe : DatePipe,
     private reghoraService : RegHoraService,
-    private emmiterService: EmitterService
+    private emmiterService: EmitterService,
+    private location: Location,
 
   ) { }
 
@@ -94,9 +97,7 @@ export class HoraComponent implements OnInit {
     this.fecha_inicial = this.datePipe.transform(event.start, 'yyyy-MM-dd HH:mm:ss');
     this.fecha_final = this.datePipe.transform(event.end, 'yyyy-MM-dd HH:mm:ss');
     var modal = UIkit.modal("#modal-agregar");
-    modal.show();
-
-    
+    modal.show(); 
   }
 
 
@@ -119,6 +120,7 @@ export class HoraComponent implements OnInit {
     var horaini = arraySplt[0].trim();
     var horafin = arraySplt[1].split(/[a-zA-Z]/)[0].trim();
     var fechaconvertir = event.el.fcSeg.start;
+
 
     
     if(horaini.length == 4){
@@ -152,21 +154,22 @@ export class HoraComponent implements OnInit {
 
     console.log(data);
 
-    this.reghoraService.eliminar(data).subscribe(
+    GeneralService.ABRIR_CONFIRMACION().subscribe(
   		response => {
-        if(response != null) {
-          console.log(response);
-        }
+        this.reghoraService.eliminar(data).subscribe(
+          response => {
+            if(response != null) {
+               GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "success");
+               console.log(response);
+               window.location.reload();
+            }
       },
   		error => {
   			console.log(<any>error);
   		}
     );
-
-
   }
-
-  onChangeSearch(val: string) {}
-  onFocused(e){}
-  
+    )};
+    onChangeSearch(val: string) {}
+    onFocused(e){}
 }
