@@ -53,7 +53,7 @@
                     <th>Autorizado</th>
                 </tr>
 
-                <tr *ngFor="let reporte of reportes | filter : buscar | paginate: { itemsPerPage: 6, currentPage: p1, id: 'first'}">
+                <tr *ngFor="let reporte of reportes | filter : buscar | paginate: { itemsPerPage: 6, currentPage: p}">
                     <td>{{reporte.actividad.Act_Nombre}}</td>
                     <td>{{reporte.actsec}}</td>
                     <td>{{reporte.fechaini}}</td>

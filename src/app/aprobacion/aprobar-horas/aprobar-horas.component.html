@@ -41,7 +41,7 @@
             <div>
                 <div class="uk-card uk-card-default uk-card-body">
                     <div uk-alert>
-                        <h2>El usuario no registra horas extra <i class="fas fa-table"></i></h2>
+                        <h2>El proyecto no registra horas extra <i class="fas fa-table"></i></h2>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <th>Estado</th>
                     <th>Accion</th>
                 </tr>
-                <tr *ngFor="let usuario2 of usuarios2">
+                <tr *ngFor="let usuario2 of usuarios2 | paginate: { itemsPerPage: 10, currentPage: p}">
 
                     <td>{{usuario2.Act_Nombre}}</td>
                     <td>{{usuario2.actsec}}</td>
@@ -78,5 +78,6 @@
                 </tr>
             </tbody>
         </table>
+        <pagination-controls (pageChange)="p = $event" ></pagination-controls>
     </div>
 </div>
