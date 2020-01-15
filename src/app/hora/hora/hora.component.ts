@@ -129,7 +129,7 @@ export class HoraComponent implements OnInit {
     console.log(cosa);
  
     var html = cosa.split("=");
-    console.log(html)
+    // console.log(html)
 
     var Asplit = html[4].split("<");
     var hora = Asplit[0];
@@ -143,20 +143,32 @@ export class HoraComponent implements OnInit {
 
     // Formato de horas 24H
     var horainicial = Arrayhora[0].replace('"', '').trim();
-    var horafinal = Arrayhora[1].replace('"', '').replace('>', '').trim(); 
+    var horafinal = Arrayhora[1].replace('"', '').replace('>', '').trim();
+    var asdasd = Arrayhora;
     console.log("inicio", horainicial);
     console.log("fin", horafinal);
     // var alla = horainicial.datePipe.transform("HH:mm");
     // console.log("result", alla);
 
-    switch(horafinal){
-      case '2:00 PM':
-        horafinal = '14:00'
-        console.log("campeon", horafinal)
-        break; 
-      default:
-        console.log("paila-mijo") 
+    var lugar = horafinal.split(" ");
+    console.log(lugar[0],lugar[1]);
+    switch(lugar[1]){
+      case 'PM':
+        var a = parseInt(horafinal);
+        var res = a + 12;
+        console.log("campeon", res, "O.O")
+        break;
+      case 'AM':
+        var a = parseInt(horafinal);
+        console.log(a);
+      default :
+        console.log("paila-mijo", horafinal) 
     }
+      var rest = res;
+      console.log(rest)  
+
+    var estasies = res;
+    console.log("hora-final", estasies)
 
     
     
@@ -164,23 +176,21 @@ export class HoraComponent implements OnInit {
 
     if(horaini.length == 4){
 
-      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0'+ hora);
+      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +   rest + ':00');
       console.log(fechaini);
-      /* var x = this.datePipe.transform(hora,'HH:mm:ss');
-      console.log("erer",x); */
     }else {
 
-      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + hora);
+      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +  rest + ':00');
       console.log(fechaini);    }
 
     if(horafin.length == 4){
 
-      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0'+ hora);
+      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +  res + ':00');
       console.log(fechafin);
 
     }else {
 
-      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + hora);
+      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +  res + ':00');
       console.log(fechafin);
     }
 
