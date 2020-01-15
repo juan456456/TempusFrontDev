@@ -127,16 +127,10 @@ export class HoraComponent implements OnInit {
     var fechaconvertir = event.el.fcSeg.start;
     var cosa = event.el.innerHTML
     console.log(cosa);
- 
-    var html = cosa.split("=");
-    // console.log(html)
 
+    var html = cosa.split("=");
     var Asplit = html[4].split("<");
     var hora = Asplit[0];
-    // console.log("Array", html);
-    // console.log("ArrayS", Asplit);
-    // console.log("hora", hora);
-
     var Arrayhora = hora.split("-")
     console.log(Arrayhora);
 
@@ -147,8 +141,25 @@ export class HoraComponent implements OnInit {
     var asdasd = Arrayhora;
     console.log("inicio", horainicial);
     console.log("fin", horafinal);
-    // var alla = horainicial.datePipe.transform("HH:mm");
-    // console.log("result", alla);
+
+
+    var lugarsito = horainicial.split(" ");
+    console.log(lugarsito[0],lugarsito[1]);
+    switch(lugarsito[1]){
+      case 'PM':
+        var b = parseInt(horainicial);
+        var result = b + 12;
+        console.log("maquina", result, "O.O")
+        break;
+        default :
+        var b = parseInt(horainicial);
+        res = b;
+        console.log("manco-man", horainicial, result) 
+    }
+
+      var estasiesx2 = res + ':00';
+      console.log("hora-inicial", estasiesx2)
+
 
     var lugar = horafinal.split(" ");
     console.log(lugar[0],lugar[1]);
@@ -158,39 +169,35 @@ export class HoraComponent implements OnInit {
         var res = a + 12;
         console.log("campeon", res, "O.O")
         break;
-      case 'AM':
-        var a = parseInt(horafinal);
-        console.log(a);
       default :
-        console.log("paila-mijo", horafinal) 
+      var a = parseInt(horafinal);
+      res = a;
+        console.log("paila-mijo", horafinal , res) 
     }
-      var rest = res;
-      console.log(rest)  
-
-    var estasies = res;
+    var estasies = res + ':00';
     console.log("hora-final", estasies)
 
-    
+  console.log()
+  console.log(lugar[0],lugar[1])
     
 
 
     if(horaini.length == 4){
 
-      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +   rest + ':00');
+      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +  estasiesx2 );
       console.log(fechaini);
     }else {
-
-      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +  rest + ':00');
+      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +  estasiesx2 );
       console.log(fechaini);    }
 
     if(horafin.length == 4){
 
-      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +  res + ':00');
+      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + estasies);
       console.log(fechafin);
 
     }else {
 
-      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +  res + ':00');
+      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " "  + estasies );
       console.log(fechafin);
     }
 
