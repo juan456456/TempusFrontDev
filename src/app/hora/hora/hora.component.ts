@@ -3,15 +3,18 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for selectable
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { RegHoraService } from 'src/services/reghora.service';
-import { Calendar } from '@fullcalendar/core';
+import { Calendar, formatIsoTimeString, formatDate } from '@fullcalendar/core';
 import { GeneralService } from 'src/services/general.service';
 import { EmitterService } from 'src/services/emitter.service';
 import { DatePipe } from '@angular/common';
-import { formatDate } from '@angular/common';
+
+// import { formatDate } from '@angular/common';
 import * as $ from 'jquery';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { from } from 'rxjs';
+import { format } from 'url';
+import { exists } from 'fs';
 declare var UIkit: any;
 
 @Component({
@@ -36,6 +39,7 @@ export class HoraComponent implements OnInit {
   public pro = [];
   public events = [];
   public eventsN = [];
+  public re : any = '8:00 PM - 9:00 PM';
 
 
   /**
@@ -54,6 +58,7 @@ export class HoraComponent implements OnInit {
         this.listarNovedades(data.idusu);    
       });    
     }  
+    // this.calendar.formatDate(this.fecha_inicial, format)
   }
 
   listarNovedades(idusu)
@@ -62,6 +67,7 @@ export class HoraComponent implements OnInit {
   		response => {
         if(response != null) {
           this.events = response;
+          console.log(response)
         }
       },
   		error => {
@@ -113,35 +119,68 @@ export class HoraComponent implements OnInit {
   }
 
 
-  selectEvent(event) {
-    console.log(event)
-
+  selectEvent(event, start) {
+    // console.log(event.el.innerHTML)
     var arraySplt = event.el.text.split("-");
     var horaini = arraySplt[0].trim();
     var horafin = arraySplt[1].split(/[a-zA-Z]/)[0].trim();
     var fechaconvertir = event.el.fcSeg.start;
+    var cosa = event.el.innerHTML
+    console.log(cosa);
+ 
+    var html = cosa.split("=");
+    console.log(html)
 
+    var Asplit = html[4].split("<");
+    var hora = Asplit[0];
+    // console.log("Array", html);
+    // console.log("ArrayS", Asplit);
+    // console.log("hora", hora);
+
+    var Arrayhora = hora.split("-")
+    console.log(Arrayhora);
+
+
+    // Formato de horas 24H
+    var horainicial = Arrayhora[0].replace('"', '').trim();
+    var horafinal = Arrayhora[1].replace('"', '').replace('>', '').trim(); 
+    console.log("inicio", horainicial);
+    console.log("fin", horafinal);
+    // var alla = horainicial.datePipe.transform("HH:mm");
+    // console.log("result", alla);
+
+    switch(horafinal){
+      case '2:00 PM':
+        horafinal = '14:00'
+        console.log("campeon", horafinal)
+        break; 
+      default:
+        console.log("paila-mijo") 
+    }
 
     
+    
+
+
     if(horaini.length == 4){
 
-      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0'+ horaini);
+      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0'+ hora);
       console.log(fechaini);
-      /* var x = this.datePipe.transform(horaini,'HH:mm:ss');
+      /* var x = this.datePipe.transform(hora,'HH:mm:ss');
       console.log("erer",x); */
     }else {
 
-      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + horaini);
+      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + hora);
       console.log(fechaini);    }
 
     if(horafin.length == 4){
 
-      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0'+ horafin);
+      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0'+ hora);
       console.log(fechafin);
 
     }else {
 
-      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + horafin);
+      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + hora);
       console.log(fechafin);
     }
 
@@ -169,7 +208,8 @@ export class HoraComponent implements OnInit {
   		}
     );
   }
-    )};
+   )
+  };
     onChangeSearch(val: string) {}
     onFocused(e){}
 }
