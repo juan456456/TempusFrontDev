@@ -18,6 +18,7 @@ export class AprobarHorasAdminComponent implements OnInit {
      public usuarios2: any = [];
     public data: any = [];
     public id : any;
+    p: number = 1;
     public idcolaborador :any;
 
   ngOnInit() {

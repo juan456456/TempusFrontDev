@@ -25,7 +25,7 @@
             <span class="uk-label uk-label-success">Horas</span>
         </div>
 
-        <div class="uk-width-1-2@s">
+        <div class="uk-width-1-1@s">
             <label class="uk-form-label" for="form-stacked-text">Colaborador</label>
             <select class=" uk-width uk-select uk-form-width-large" [(ngModel)]="idcolaborador" (ngModelChange)="consultar()">
                 <option *ngFor="let usuario of usuarios" value="{{usuario.idusu}}">{{usuario.nombre}}</option>
@@ -58,7 +58,7 @@
                     <th>Estado</th>
                     <th>Accion</th>
                 </tr>
-                <tr *ngFor="let usuario2 of usuarios2">
+                <tr *ngFor="let usuario2 of usuarios2 | paginate: { itemsPerPage: 10, currentPage: p}">
 
                     <td>{{usuario2.Act_Nombre}}</td>
                     <td>{{usuario2.actsec}}</td>
@@ -73,11 +73,9 @@
                         </button>
                     </td>
                     <td *ngIf="usuario2.autorizado == 1"><button title="Desaprobar" (click)="desaprobar(usuario2.idreghoras)" class="uk-button uk-button-danger"><i class="fas fa-times"></i></button></td>
-
-
-
                 </tr>
             </tbody>
         </table>
+        <pagination-controls (pageChange)="p = $event" ></pagination-controls>
     </div>
 </div>

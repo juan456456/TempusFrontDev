@@ -23,6 +23,8 @@ export class AprobarHorasComponent implements OnInit {
   public proyectos: any;
   public usuarios2: any = [];
   public idproyecto: any = [];
+  p: number = 1;
+
 
 
   ngOnInit() {
