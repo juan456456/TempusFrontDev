@@ -65,7 +65,6 @@ export class HoraComponent implements OnInit {
   		response => {
         if(response != null) {
           this.events = response;
-          console.log(response)
         }
       },
   		error => {
@@ -80,7 +79,6 @@ export class HoraComponent implements OnInit {
   		response => {
         if(response != null) {
           this.eventsN = response;
-          console.log(this.eventsN);
         }
       },
   		error => {
@@ -117,121 +115,131 @@ export class HoraComponent implements OnInit {
 
 
   selectEvent(event) {
-    // console.log(event.el.innerHTML)
     var arraySplt = event.el.text.split("-");
     var horaini = arraySplt[0].trim();
     var horafin = arraySplt[1].split(/[a-zA-Z]/)[0].trim();
-    var fechaconvertir = event.el.fcSeg.start;
     var cosa = event.el.innerHTML
-    console.log(fechaconvertir);
-
     var html = cosa.split("=");
     var Asplit = html[4].split("<");
     var hora = Asplit[0];
     var Arrayhora = hora.split("-")
-    console.log(Arrayhora);
 
 
     // Formato de horas 24H
     var horainicial = Arrayhora[0].replace('"', '').trim();
     var horafinal = Arrayhora[1].replace('"', '').replace('>', '').trim();
     var asdasd = Arrayhora;
-    console.log("inicio", horainicial);
-    console.log("fin", horafinal);
     var separado = horafinal.split(":");
-    console.log(separado[1])
     var jjj = separado[1]
-
-
 
     switch (jjj){
       case '00 AM':
-        jjj = '00'
-        console.log(jjj)
+         jjj = '00'
         break;
-        case '30 AM':
-        jjj = '30'
-        console.log(jjj)
+         case '30 AM':
+         jjj = '30'
         break;
         case '00 PM':
-          jjj = '00'
-          console.log(jjj)
+         jjj = '00'
+         break;
+        case '30 PM':
+         jjj = '30'
           break;
-          case '30 PM':
-          jjj = '30'
-          console.log(jjj)
-          break
       default : 
       console.log("no-sirvio")
     }
 
     var separadoini = horainicial.split(":");
-    console.log(separadoini[1])
     var imperialista = separadoini[1]
     switch (imperialista){
       case '00 AM':
         imperialista = '00'
-        console.log(imperialista)
         break;
         case '30 AM':
           imperialista = '30'
-        console.log(imperialista)
         break;
         case '00 PM':
           imperialista = '00'
-          console.log(imperialista)
           break;
           case '30 PM':
             imperialista = '30'
-          console.log(imperialista)
           break
       default : 
       console.log("no-sirvio")
     }
   
     var lugarsito = horainicial.split(" ");
-    console.log(lugarsito[0],lugarsito[1]);
-    switch(lugarsito[1]){
+    var esacsosa = lugarsito[0];
+    switch (esacsosa) {
+      case '12:00':
+        esacsosa = '00:00'
+        break;
+        case '12:30':
+        esacsosa = '00:30'
+        break;
+        case '24:00':
+        esacsosa = '00:00'
+        break;
+        case '24:30':
+        esacsosa = '00:30'
+        break;
+      default:
+        console.log("esacsosa no sirvio")
+        break;
+    }
+
+
+      switch(lugarsito[1]){
       case 'PM':
-        var b = parseInt(horainicial);
+        var b = parseInt(esacsosa);
         var result = b + 12;
         console.log("maquina", result, "O.O")
         break;
         default :
-        var b = parseInt(horainicial);
+        var b = parseInt(esacsosa);
         result = b;
-        console.log("manco-man", horainicial, result) 
-    }
-
+        console.log("manco-man", esacsosa, result)
+    };
       var estasiesx2 = result + ":" + imperialista;
-      console.log("hora-inicial", estasiesx2)
 
 
     var lugar = horafinal.split(" ");
-    console.log(lugar[0],lugar[1]);
+    var estafinal = lugar[0];
+    switch (estafinal) {
+      case '12:00':
+        estafinal = '00:00'
+        break;
+        case '12:30':
+        estafinal = '00:30'
+        break;
+        case '24:00':
+          estafinal = '00:00'
+          break;
+        case '24:30':
+          estafinal = '00:30'
+          break;
+      default:
+        console.log("estafinal no sirvio")
+        break;
+    }
+
+    console.log(lugar);
     switch(lugar[1]){
       case 'PM':
-        var a = parseInt(horafinal);
+        var a = parseInt(estafinal);
         var res = a + 12;
-        console.log("campeon", res, "O.O")
         break;
       default :
-      var a = parseInt(horafinal);
+      var a = parseInt(estafinal);
       res = a;
-        console.log("paila-mijo", horafinal , res) 
     }
-        var estasies = res + ":" + jjj;
-        console.log("hora-final", estasies)
-    
-      console.log()
-      console.log(lugar[0],lugar[1])
 
-
+      var estasies = res + ":" + jjj;
       var calendario = event.view.title
       var inte = calendario.split(" ");
       var mes = inte[0]
-      console.log(inte)
-  
+
+
       switch(mes)
       {
         case 'January': 
@@ -273,43 +281,32 @@ export class HoraComponent implements OnInit {
         default :
         console.log("Ese gato no sirvio");
       }
-      console.log("muetsra", mes)
       var dia = inte[1].replace(',', ' ').trim()
       var año = inte[2]
-      var calend = año + "-" + mes + "-" + dia
+      var calend = año + "-"+ mes +"-"+ dia
       console.log("??", calend)
+ 
   
   
-      let login = JSON.parse(localStorage.getItem("logindata"));
-      let data = {
-        'idusu' : login.idusu,
-        'fechaini' : fechaini,
-        'fechafin': fechafin
-      };
 
     if(estasiesx2.length == 4){
-
-      var fechaini = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " + '0' + estasiesx2 );
-      console.log(fechaini);
-     
+      var fechaini = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " + '0' + estasiesx2);
     }else {
-
-      var fechaini = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " +  estasiesx2 );
-      console.log(fechaini); 
-      
-      
+      var fechaini = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " +  estasiesx2);
     }
-
     if(estasies.length == 4){
-
-      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0' +estasies);
-      console.log(fechafin);
-
+      var fechafin = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " + '0' +estasies);
     }else {
-
-      var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " "  + estasies );
-      console.log(fechafin);
+      var fechafin = this.datePipe.transform(calend,'yyyy-MM-dd'+ " "  + estasies );
     }
+
+    let login = JSON.parse(localStorage.getItem("logindata"));
+    let data = {
+      'idusu' : login.idusu,
+      'fechaini' : fechaini,
+      'fechafin': fechafin
+    };
+
 
     GeneralService.ABRIR_CONFIRMACION().subscribe(
   		response => {
