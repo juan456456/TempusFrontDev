@@ -14,7 +14,7 @@ import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { from } from 'rxjs';
 import { format } from 'url';
-import { exists } from 'fs';
+import { AgregarHoraComponent } from '../agregar-hora/agregar-hora.component';
 declare var UIkit: any;
 
 @Component({
@@ -39,7 +39,6 @@ export class HoraComponent implements OnInit {
   public pro = [];
   public events = [];
   public eventsN = [];
-  public re : any = '8:00 PM - 9:00 PM';
 
 
   /**
@@ -58,7 +57,6 @@ export class HoraComponent implements OnInit {
         this.listarNovedades(data.idusu);    
       });    
     }  
-    // this.calendar.formatDate(this.fecha_inicial, format)
   }
 
   listarNovedades(idusu)
@@ -113,20 +111,19 @@ export class HoraComponent implements OnInit {
     /*trae un tipo de dato epoch, al cual se le resta 1 dia == 8640000 milisegundos para 
     que la fecha no se adeante un dia al seleccionar desde el calendario */
     this.fecha_final = this.datePipe.transform(event.end-86400000 , 'yyyy-MM-dd HH:mm:ss');
-    
     var modal = UIkit.modal("#modal-agregar-date");
     modal.show(); 
   }
 
 
-  selectEvent(event, start) {
+  selectEvent(event) {
     // console.log(event.el.innerHTML)
     var arraySplt = event.el.text.split("-");
     var horaini = arraySplt[0].trim();
     var horafin = arraySplt[1].split(/[a-zA-Z]/)[0].trim();
     var fechaconvertir = event.el.fcSeg.start;
     var cosa = event.el.innerHTML
-    console.log(cosa);
+    console.log(fechaconvertir);
 
     var html = cosa.split("=");
     var Asplit = html[4].split("<");
@@ -144,6 +141,8 @@ export class HoraComponent implements OnInit {
     var separado = horafinal.split(":");
     console.log(separado[1])
     var jjj = separado[1]
+
+
 
     switch (jjj){
       case '00 AM':
@@ -190,8 +189,6 @@ export class HoraComponent implements OnInit {
       console.log("no-sirvio")
     }
   
- 
-
     var lugarsito = horainicial.split(" ");
     console.log(lugarsito[0],lugarsito[1]);
     switch(lugarsito[1]){
@@ -230,14 +227,74 @@ export class HoraComponent implements OnInit {
       console.log(lugar[0],lugar[1])
 
 
+      var calendario = event.view.title
+      var inte = calendario.split(" ");
+      var mes = inte[0]
+      console.log(inte)
+  
+      switch(mes)
+      {
+        case 'January': 
+        mes = '01'
+        break;
+        case 'February': 
+        mes = '02'
+        break;
+        case 'March': 
+        mes = '03'
+        break;
+        case 'April': 
+        mes = '04'
+        break;
+        case 'May': 
+        mes = '05'
+        break;
+        case 'June': 
+        mes = '06'
+        break;
+        case 'July': 
+        mes = '07'
+        break;
+        case 'August': 
+        mes = '08'
+        break;
+        case 'September': 
+        mes = '09'
+        break;
+        case 'October': 
+        mes = '10'
+        break;
+        case 'November': 
+        mes = '11'
+        break;
+        case 'December': 
+        mes = '12'
+        break;
+        default :
+        console.log("Ese gato no sirvio");
+      }
+      console.log("muetsra", mes)
+      var dia = inte[1].replace(',', ' ').trim()
+      var año = inte[2]
+      var calend = año + "-" + mes + "-" + dia
+      console.log("??", calend)
+  
+  
+      let login = JSON.parse(localStorage.getItem("logindata"));
+      let data = {
+        'idusu' : login.idusu,
+        'fechaini' : fechaini,
+        'fechafin': fechafin
+      };
+
     if(estasiesx2.length == 4){
 
-      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " + '0' + estasiesx2 );
+      var fechaini = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " + '0' + estasiesx2 );
       console.log(fechaini);
      
     }else {
 
-      var fechaini = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " " +  estasiesx2 );
+      var fechaini = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " +  estasiesx2 );
       console.log(fechaini); 
       
       
@@ -253,15 +310,6 @@ export class HoraComponent implements OnInit {
       var fechafin = this.datePipe.transform(fechaconvertir,'yyyy-MM-dd'+ " "  + estasies );
       console.log(fechafin);
     }
-
-    let login = JSON.parse(localStorage.getItem("logindata"));
-    let data = {
-      'idusu' : login.idusu,
-      'fechaini' : fechaini,
-      'fechafin': fechafin
-    };
-
-    console.log(data);
 
     GeneralService.ABRIR_CONFIRMACION().subscribe(
   		response => {
