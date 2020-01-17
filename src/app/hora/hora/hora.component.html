@@ -24,7 +24,7 @@
 
                 <div>
                     <div class="uk-card uk-card-default uk-card-body">
-                        <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="eventsN" [selectable]="true" (select)="eventSelectDate($event)" deepChangeDetection="true"></full-calendar>
+                        <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" (eventClick)="selectEventos($event)" [events]="eventsN" [selectable]="true" deepChangeDetection="true"></full-calendar>
                     </div>
                 </div>
 

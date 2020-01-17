@@ -115,190 +115,19 @@ export class HoraComponent implements OnInit {
 
 
   selectEvent(event) {
-    var arraySplt = event.el.text.split("-");
-    var horaini = arraySplt[0].trim();
-    var horafin = arraySplt[1].split(/[a-zA-Z]/)[0].trim();
-    var cosa = event.el.innerHTML
-    var html = cosa.split("=");
-    var Asplit = html[4].split("<");
-    var hora = Asplit[0];
-    var Arrayhora = hora.split("-")
+    console.log(event);
+    var fechainicial = event.event.start;
+    var fechafinal = event.event.end;
+    console.log(fechainicial);
+    console.log(fechafinal);
 
+    var fechaini = this.datePipe.transform(fechainicial,'yyyy-MM-dd HH:mm' );
+    var fechafin = this.datePipe.transform(fechafinal,'yyyy-MM-dd HH:mm' );
 
-    // Formato de horas 24H
-    var horainicial = Arrayhora[0].replace('"', '').trim();
-    var horafinal = Arrayhora[1].replace('"', '').replace('>', '').trim();
-    var asdasd = Arrayhora;
-    var separado = horafinal.split(":");
-    var jjj = separado[1]
-
-    switch (jjj){
-      case '00 AM':
-         jjj = '00'
-        break;
-         case '30 AM':
-         jjj = '30'
-        break;
-        case '00 PM':
-         jjj = '00'
-         break;
-        case '30 PM':
-         jjj = '30'
-          break;
-      default : 
-      console.log("no-sirvio")
-    }
-
-    var separadoini = horainicial.split(":");
-    var imperialista = separadoini[1]
-    switch (imperialista){
-      case '00 AM':
-        imperialista = '00'
-        break;
-        case '30 AM':
-          imperialista = '30'
-        break;
-        case '00 PM':
-          imperialista = '00'
-          break;
-          case '30 PM':
-            imperialista = '30'
-          break
-      default : 
-      console.log("no-sirvio")
-    }
-  
-    var lugarsito = horainicial.split(" ");
-    var esacsosa = lugarsito[0];
-    switch (esacsosa) {
-      case '12:00':
-        esacsosa = '00:00'
-        break;
-        case '12:30':
-        esacsosa = '00:30'
-        break;
-        case '24:00':
-        esacsosa = '00:00'
-        break;
-        case '24:30':
-        esacsosa = '00:30'
-        break;
-      default:
-        console.log("esacsosa no sirvio")
-        break;
-    }
-
-
-      switch(lugarsito[1]){
-      case 'PM':
-        var b = parseInt(esacsosa);
-        var result = b + 12;
-        console.log("maquina", result, "O.O")
-        break;
-        default :
-        var b = parseInt(esacsosa);
-        result = b;
-        console.log("manco-man", esacsosa, result)
-    };
-      var estasiesx2 = result + ":" + imperialista;
-
-
-    var lugar = horafinal.split(" ");
-    var estafinal = lugar[0];
-    switch (estafinal) {
-      case '12:00':
-        estafinal = '00:00'
-        break;
-        case '12:30':
-        estafinal = '00:30'
-        break;
-        case '24:00':
-          estafinal = '00:00'
-          break;
-        case '24:30':
-          estafinal = '00:30'
-          break;
-      default:
-        console.log("estafinal no sirvio")
-        break;
-    }
-
-    console.log(lugar);
-    switch(lugar[1]){
-      case 'PM':
-        var a = parseInt(estafinal);
-        var res = a + 12;
-        break;
-      default :
-      var a = parseInt(estafinal);
-      res = a;
-    }
-
-      var estasies = res + ":" + jjj;
-      var calendario = event.view.title
-      var inte = calendario.split(" ");
-      var mes = inte[0]
-
-
-      switch(mes)
-      {
-        case 'January': 
-        mes = '01'
-        break;
-        case 'February': 
-        mes = '02'
-        break;
-        case 'March': 
-        mes = '03'
-        break;
-        case 'April': 
-        mes = '04'
-        break;
-        case 'May': 
-        mes = '05'
-        break;
-        case 'June': 
-        mes = '06'
-        break;
-        case 'July': 
-        mes = '07'
-        break;
-        case 'August': 
-        mes = '08'
-        break;
-        case 'September': 
-        mes = '09'
-        break;
-        case 'October': 
-        mes = '10'
-        break;
-        case 'November': 
-        mes = '11'
-        break;
-        case 'December': 
-        mes = '12'
-        break;
-        default :
-        console.log("Ese gato no sirvio");
-      }
-      var dia = inte[1].replace(',', ' ').trim()
-      var año = inte[2]
-      var calend = año + "-"+ mes +"-"+ dia
-      console.log("??", calend)
- 
+    console.log(fechaini);
+    console.log(fechafin);
   
   
-
-    if(estasiesx2.length == 4){
-      var fechaini = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " + '0' + estasiesx2);
-    }else {
-      var fechaini = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " +  estasiesx2);
-    }
-    if(estasies.length == 4){
-      var fechafin = this.datePipe.transform(calend,'yyyy-MM-dd'+ " " + '0' +estasies);
-    }else {
-      var fechafin = this.datePipe.transform(calend,'yyyy-MM-dd'+ " "  + estasies );
-    }
 
     let login = JSON.parse(localStorage.getItem("logindata"));
     let data = {
@@ -314,7 +143,6 @@ export class HoraComponent implements OnInit {
           response => {
             if(response != null) {
                GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "success");
-               console.log(response);
                window.location.reload();
             }
       },
@@ -327,4 +155,45 @@ export class HoraComponent implements OnInit {
   };
     onChangeSearch(val: string) {}
     onFocused(e){}
+
+    selectEventos(eventsN) {
+      console.log(eventsN);
+      var fechainicial = eventsN.event.start;
+      var fechafinal = eventsN.event.end;
+      console.log(fechainicial);
+      console.log(fechafinal);
+  
+      var fechaini = this.datePipe.transform(fechainicial,'yyyy-MM-dd HH:mm' );
+      var fechafin = this.datePipe.transform(fechafinal,'yyyy-MM-dd HH:mm' );
+  
+      console.log(fechaini);
+      console.log(fechafin);
+    
+    
+  
+      let login = JSON.parse(localStorage.getItem("logindata"));
+      let data = {
+        'idusu' : login.idusu,
+        'fechaini' : fechaini,
+        'fechafin': fechafin
+      };
+  
+  
+  
+      GeneralService.ABRIR_CONFIRMACION().subscribe(
+        response => {
+          this.reghoraService.eliminar(data).subscribe(
+            response => {
+              if(response != null) {
+                 GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "success");
+                 window.location.reload();
+              }
+        },
+        error => {
+          console.log(<any>error);
+        }
+      );
+    }
+     )
+     };
 }
