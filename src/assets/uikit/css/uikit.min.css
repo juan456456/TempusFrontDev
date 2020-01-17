@@ -1573,8 +1573,8 @@ select.uk-form-width-xsmall {
 
 .uk-container-expand {
   max-width: none;
-  background-color: white;
-  border-block-end: 2px #e5e5e5 solid;
+  background-color: #002b62;
+  border-block-end: 2px #002b62 solid;
 
 }
 
@@ -2837,7 +2837,7 @@ ul.uk-nav-sub {
 .uk-navbar {
   display: flex;
   position: relative;
-  background-color: white;
+  background-color: #002b62;
 
 
 }
