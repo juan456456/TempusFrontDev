@@ -6,7 +6,7 @@ import { GeneralService } from 'src/services/general.service';
 import { RegHoraService } from 'src/services/reghora.service';
 import {RegHora} from 'src/models/reghora.model';
 import { ProjectDetailService } from 'src/services/projectdetail.service';
-
+import { EmitterService } from 'src/services/emitter.service';
 
 @Component({
   selector: 'app-agregar-novedades',
@@ -21,6 +21,7 @@ export class AgregarNovedadesComponent implements OnInit {
     private projectDetailService : ProjectDetailService,
     private generalService : GeneralService,
     private reghoraService : RegHoraService,
+    private emmiterService : EmitterService
 
 
   ) { }
@@ -132,7 +133,8 @@ export class AgregarNovedadesComponent implements OnInit {
   		response => {
         this.generalService.cerrarSpinner();
         GeneralService.ABRIR_MENSAJE("La hora se ha cargado correctamente", "success");
-  		},
+window.location.reload();
+      },
   		error => {
         GeneralService.ABRIR_MENSAJE("Verificar información", "error");
   			console.log(<any>error);

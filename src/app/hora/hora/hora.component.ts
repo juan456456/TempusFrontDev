@@ -162,7 +162,15 @@ export class HoraComponent implements OnInit {
       var fechafinal = eventsN.event.end;
       console.log(fechainicial);
       console.log(fechafinal);
-  
+
+      if(fechafinal == null){
+        var fechafinal = eventsN.event.start;
+        console.log("se remplazo la fecha final", fechafinal)
+      }else {
+        var fechafinal = eventsN.event.end;
+        console.log("esta es la fecha final", fechafinal)
+      };
+      
       var fechaini = this.datePipe.transform(fechainicial,'yyyy-MM-dd HH:mm' );
       var fechafin = this.datePipe.transform(fechafinal,'yyyy-MM-dd HH:mm' );
   
@@ -192,8 +200,10 @@ export class HoraComponent implements OnInit {
         error => {
           console.log(<any>error);
         }
-      );
+       );
     }
      )
+
      };
+
 }
