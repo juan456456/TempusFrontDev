@@ -52,7 +52,7 @@ export class AgregarHoraComponent implements OnInit {
   public verProyectoo : any;
   public idProject : any;
   public estado : any;  
-  public  : any;
+  public vistaproy : any;
 
   @Input() fecha_inicial : any; 
   @Input() fecha_final : any; 
@@ -76,10 +76,11 @@ public prodetailid;
       this.estado = this.data.estado;
       this.proyecto = this.data.proyadmin;
       this.jefatura = this.data.idjefatura;
+      this.vistaproy = this.data.vistaproyectos;
       this.listarProjects();
       this.listarTodo();
       this.listarNovedades(this.proyecto);
-
+      console.log(this.vistaproy)
   }
 
   /**
@@ -243,6 +244,7 @@ public prodetailid;
         response => {
           observer.next(response);
         },
+
         error => {
           console.log(<any>error);
         }
@@ -323,8 +325,14 @@ cualquiercosa:any=[];
 
     reghora.idtiporeg = this.cualquiercosa.idprojectactivityu;
     reghora.txttiporeg = this.cualquiercosa.wbs_element;
-
     reghora.proyecto = this.proyecto;
+
+      if(reghora.idactividad == 0){
+        GeneralService.ABRIR_MENSAJE(" Porfavor complete todos los campos", "error");
+        return;
+      }else{
+
+      }
 
     this.generalService.abrirSpinner();
      this.reghoraService.agregar(reghora).subscribe(
@@ -333,10 +341,17 @@ cualquiercosa:any=[];
         GeneralService.ABRIR_MENSAJE("La hora se ha cargado correctamente", "success");
         this.listarTodo();
         this.emmiterService.onRefreshEventsHoraComponent();
-  		},
+      },
   		error => {
-        GeneralService.ABRIR_MENSAJE("Verificar información", "error");
-  			console.log(<any>error);
+  
+        if (error.status = 400)
+        {
+          GeneralService.ABRIR_MENSAJE(error.error, "error");
+          console.log(<any>error);
+        }else{
+          GeneralService.ABRIR_MENSAJE("Verificar información", "error");
+          console.log(<any>error);
+        }
   		}
     ); 
 
