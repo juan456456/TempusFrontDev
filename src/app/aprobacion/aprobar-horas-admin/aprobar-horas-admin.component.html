@@ -27,13 +27,13 @@
 
         <div class="uk-width-1-1@s">
             <label class="uk-form-label" for="form-stacked-text">Colaborador</label>
-            <select class=" uk-width uk-select uk-form-width-large" [(ngModel)]="idcolaborador" (ngModelChange)="consultar()">
+            <select class=" uk-width uk-select uk-form-width-large" [(ngModel)]="idcolaborador" (ngModelChange)="tablas_uni()">
                 <option *ngFor="let usuario of usuarios" value="{{usuario.idusu}}">{{usuario.nombre}}</option>
             </select>
         </div>
     </div>
 
-    <div class="uk-section-small" *ngIf="usuarios2 == 0">
+    <div class="uk-section-small" *ngIf="tablas == 0">
         <div class="uk-container uk-container-large">
             <div>
                 <div class="uk-card uk-card-default uk-card-body">
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="uk-overflow-auto" style="padding: 30px" *ngIf="usuarios2 != 0">
+    <div class="uk-overflow-auto" style="padding: 30px" *ngIf="tablas != 0">
         <table class="uk-table uk-table-small uk-table-divider">
             <tbody>
                 <tr>
@@ -58,10 +58,12 @@
                     <th>Estado</th>
                     <th>Accion</th>
                 </tr>
-                <tr *ngFor="let usuario2 of usuarios2 | paginate: { itemsPerPage: 10, currentPage: p}">
+                <tr *ngFor="let usuario2 of tablas| paginate: { itemsPerPage: 10, currentPage: p}">
 
-                    <td>{{usuario2.Act_Nombre}}</td>
-                    <td>{{usuario2.actsec}}</td>
+                    <td *ngIf="usuario2.tiporeg == 3">{{usuario2.descripcion}}</td>
+                    <td *ngIf="usuario2.tiporeg != 3">{{usuario2.Act_Nombre}}</td>
+                    <td *ngIf="usuario2.tiporeg == 3">{{usuario2.descripcion}}</td>
+                    <td *ngIf="usuario2.tiporeg != 3">{{usuario2.actsec}}</td>              
                     <td>{{usuario2.fechaini}}</td>
                     <td>{{usuario2.fechafin}}</td>
                     <td>{{usuario2.canthoras}}</td>

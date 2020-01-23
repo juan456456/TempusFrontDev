@@ -16,6 +16,7 @@ export class AprobarHorasAdminComponent implements OnInit {
 
      public usuarios: any = [];
      public usuarios2: any = [];
+     public tablas : any = [];
     public data: any = [];
     public id : any;
     p: number = 1;
@@ -42,21 +43,23 @@ export class AprobarHorasAdminComponent implements OnInit {
       }
     )
   }
-
-  consultar() {
-    this.aprobacionService.consultar(this.idcolaborador).subscribe(
+  
+  tablas_uni(){
+    this.aprobacionService.tablasuni(this.idcolaborador)
+    .subscribe(
       response => {
-        this.usuarios2 = response;
-        if (this.usuarios2 == null) {
-        } else {
-          this.usuarios2 = response;
-        }
+        if (response != null) {
+          this.tablas = response;
+          console.log(this.tablas)
+      }
       },
       error => {
         console.log(<any>error);
       }
     )
   }
+
+  
 
   aprobar(id)
   {
@@ -65,7 +68,7 @@ export class AprobarHorasAdminComponent implements OnInit {
         this.aprobacionService.aprobar_admin(id).subscribe(
           response => {
             GeneralService.ABRIR_MENSAJE("Aprobacion completada", "success");
-            this.consultar();
+            this.tablas_uni();
           },
           error => {
             console.log(<any>error);
@@ -85,7 +88,7 @@ export class AprobarHorasAdminComponent implements OnInit {
         this.aprobacionService.desaprobar_admin(id).subscribe(
           response => {
             GeneralService.ABRIR_MENSAJE("Desaprobacion completada", "success");
-            this.consultar();
+            this.tablas_uni();
           },
           error => {
             console.log(<any>error);

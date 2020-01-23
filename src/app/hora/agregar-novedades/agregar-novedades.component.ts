@@ -90,6 +90,7 @@ export class AgregarNovedadesComponent implements OnInit {
   		response => {
         if(response != null) {
           this.actividadesNovedades = response;
+          console.log(this.actividadesNovedades)
         }
       },
   		error => {
@@ -106,6 +107,7 @@ export class AgregarNovedadesComponent implements OnInit {
     this.actividadService.consultarNovedad(this.idnovedad).subscribe(
       res=>{
         this.cualquiercosa = res;
+        console.log(this.cualquiercosa);
       },err=>{
         console.log(err);
       }
@@ -118,7 +120,7 @@ export class AgregarNovedadesComponent implements OnInit {
     reghora.idusuario = this.id;
     reghora.fechaini = this.formulario.value.fecha_inicial;
     reghora.fechafin = this.formulario.value.fecha_final;
-    reghora.idactividad = this.formulario.value.actividad_principal;
+    reghora.idactividad = this.cualquiercosa.id;
     reghora.actsec = this.cualquiercosa.descripcion;
    
     if(this.pestana == 'novedades')

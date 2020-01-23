@@ -3,6 +3,11 @@ import { GeneralService } from 'src/services/general.service';
 import { ReporteService } from 'src/services/reporte.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as $ from 'jquery'; 
+import { ActividadService } from 'src/services/actividad.service';
+import { Actividad } from 'src/models/actividad.model.';
+import {AprobacionService} from  'src/services/aprobacion.service'
+
+
 
 
 @Component({
@@ -15,16 +20,20 @@ export class ReporteComponent implements OnInit {
   constructor(
     private reporteService: ReporteService,
     private generalService : GeneralService,
+    private actividadService : ActividadService,
+    private aprobacionService : AprobacionService,
     private formBuilder: FormBuilder,
 
   ) { }
 
   public reportes: any = [];
+  public tablas : any = [];
   public formulario: FormGroup;
   public data: any = [];
   public objetos:any=[];
   public filtro: any = [];
-  p: number = 1;
+  public actividadesNovedades : Actividad;
+  p: number ;
   public fecha_inicial;
   public fecha_final;
   public listarReporte :  boolean;
@@ -49,9 +58,24 @@ export class ReporteComponent implements OnInit {
     this.data = JSON.parse(localStorage.getItem("logindata"));
     this.id = this.data.idusu;
     this.listar();
+    this.tablas_uni();
     }
     
-    
+    tablas_uni(){
+      this.aprobacionService.tablasuni(this.id)
+      .subscribe(
+        response => {
+          if (response != null) {
+            this.tablas = response;
+            console.log(this.tablas)
+        }
+        },
+        error => {
+          console.log(<any>error);
+        }
+      )
+    }
+
   listar() {
     this.reporteService.listar(this.id)
     .subscribe(
@@ -67,16 +91,35 @@ export class ReporteComponent implements OnInit {
     )
   }
 
+  listarNovedades(proyecto)
+  {
+    this.actividadService.listarNovedades(proyecto).subscribe(
+  		response => {
+        if(response != null) {
+          this.actividadesNovedades = response;
+          console.log(this.actividadesNovedades)
+        }
+      },
+  		error => {
+  			console.log(<any>error);
+  		}
+    );
+  }
 
 
   exportarExcel()
   {
-    if(this.buscador.value.buscar != null)
+    console.log(this.buscador.value.buscar)
+    if(this.buscador.value.buscar == null)
     {
+      console.log("hpta si entro")
+      this.exportarreporte(); 
+     
+    }else{
       var json = [];
       let x = 0;
 
-      $('#tablareporte tr').each(function () {
+     $('#tablareporte tr').each(function () {
 
         var data={
         'ACTIVIDAD' : $(this).find("td").eq(0).html(),
@@ -88,26 +131,24 @@ export class ReporteComponent implements OnInit {
         }
         json[x] = data;
         x++
-      });
+      }); 
 
     this.generalService.exportAsExcelFile(json);
     
-    }else{
-      this.exportarreporte(); 
     }
   }
   exportarreporte()
   {
+    console.log(this.data);
     let json: any = [];
     let x = 0;
     this.reportes.forEach(element => {
       let data: any = {};
-      data['ACTIVIDAD'] = element.actividad.Act_Nombre;
-      data['ACTIVIDAD sec'] = element.actividad.Act_Descripcion;
-      data['FECHA INI'] = element.fechaini;
-      data['FECHA FIN'] = element.fechafin;
-      data['CANT HORAS	'] = element.canthoras;
-
+        data['ACTIVIDAD'] = element.actividad.Act_Nombre;
+        data['ACTIVIDAD sec'] =element.Act_Descripcion;
+        data['FECHA INICIAL'] = element.fechaini;
+        data['FECHA FIN'] = element.fechafin;
+        data['canthoras'] = element.canthoras;
       if(element.autorizado == 0){
         data['estado'] = "no autorizado";
       }else{

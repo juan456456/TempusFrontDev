@@ -14,6 +14,11 @@ export class AprobacionService {
 
   url : any = GeneralService.WS_URL + "aprobarhoras/";
 
+ tablasuni(id){
+  const headers = new HttpHeaders(  ('application/json'));
+  	return this.http.get(this.url + 'tablasunidas' + '/'+ id, {headers : headers}); 
+}
+
   listarusu(id) 
   {
     const headers = new HttpHeaders(  ('application/json'));
