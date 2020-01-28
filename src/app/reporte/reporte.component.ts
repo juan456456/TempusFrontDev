@@ -112,7 +112,6 @@ export class ReporteComponent implements OnInit {
     console.log(this.buscador.value.buscar)
     if(this.buscador.value.buscar == null)
     {
-      console.log("hpta si entro")
       this.exportarreporte(); 
      
     }else{
@@ -142,10 +141,19 @@ export class ReporteComponent implements OnInit {
     console.log(this.data);
     let json: any = [];
     let x = 0;
-    this.reportes.forEach(element => {
+    this.tablas.forEach(element => {
       let data: any = {};
-        data['ACTIVIDAD'] = element.actividad.Act_Nombre;
-        data['ACTIVIDAD sec'] =element.Act_Descripcion;
+      console.log(element);
+      if(element.tiporeg == 3){
+        data['ACTIVIDAD'] = element.descripcion;
+      }else{
+        data['ACTIVIDAD'] = element.Act_Nombre;
+      }
+      if(element.tiporeg == 3){
+        data['ACTIVIDAD sec'] = element.descripcion;
+      }else{
+        data['ACTIVIDAD sec'] = element.Act_Descripcion;
+      }
         data['FECHA INICIAL'] = element.fechaini;
         data['FECHA FIN'] = element.fechafin;
         data['canthoras'] = element.canthoras;

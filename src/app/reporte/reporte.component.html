@@ -42,7 +42,7 @@
 
         <button class="uk-button uk-button-primary" style="margin-top: 10px;" (click)="exportarExcel()"><i class="far fa-file-excel"></i></button>
 
-        <table  class="uk-table uk-table-small uk-table-divider" id="tablareporte">
+        <table class="uk-table uk-table-small uk-table-divider" id="tablareporte">
             <tbody>
                 <tr>
                     <th>Actividad</th>
@@ -53,10 +53,10 @@
                     <th>Autorizado</th>
                 </tr>
                 <tr *ngFor="let todo of tablas | filter : buscar | paginate: { itemsPerPage: 10, currentPage: p}">
-                    
+
                     <td *ngIf="todo.tiporeg ==3">{{todo.descripcion}}</td>
                     <td *ngIf="todo.tiporeg !=3">{{todo.Act_Nombre}}</td>
-                    <td >{{todo.actsec}}</td>
+                    <td>{{todo.actsec}}</td>
                     <td>{{todo.fechaini}}</td>
                     <td>{{todo.fechafin}}</td>
                     <td>{{todo.canthoras}}</td>
