@@ -44,4 +44,10 @@ export class RegHoraService {
   	return this.http.put(this.url + 'eliminar', data, {headers : headers}); 
   }
 
+  actualizar(data) : any
+  {
+    const headers = new HttpHeaders(  ('application/json'));
+  	return this.http.post(this.url + 'actualizar', data, {headers : headers}); 
+  }
+
 }

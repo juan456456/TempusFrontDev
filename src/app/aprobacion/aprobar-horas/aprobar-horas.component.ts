@@ -12,20 +12,15 @@ export class AprobarHorasComponent implements OnInit {
 
   constructor(
     private aprobacionService: AprobacionService,
-    private projectosService: ProyectosService,
-    private generalService: GeneralService,
+     ) { }
 
-  ) { }
-
-  public idprojects: any;
-  public id: any;
-  public data: any = [];
-  public proyectos: any;
-  public usuarios2: any = [];
-  public idproyecto: any = [];
-  p: number = 1;
-
-
+     public usuarios: any = [];
+     public usuarios2: any = [];
+     public tablas : any = [];
+    public data: any = [];
+    public id : any;
+    p: number = 1;
+    public idcolaborador :any;
 
   ngOnInit() {
     this.data = JSON.parse(localStorage.getItem("logindata"));
@@ -33,16 +28,31 @@ export class AprobarHorasComponent implements OnInit {
     this.listar();
   }
 
-
-
   listar() {
-    this.projectosService.listar().subscribe(
+    this.aprobacionService.listarusu(this.id).subscribe(
       response => {
-        this.proyectos = response;
-        if (this.proyectos == null) {
+        this.usuarios = response;
+        if (this.usuarios == null) {
+
         } else {
-          this.proyectos = response;
-        }
+          this.usuarios = response;
+                }
+      },
+      error => {
+        console.log(<any>error);
+      }
+    )
+  }
+  
+  //lista tosos los proyectos por usuario
+  tablas_uni(){
+    this.aprobacionService.consultarProyectos(this.idcolaborador)
+    .subscribe(
+      response => {
+        if (response != null) {
+          this.tablas = response;
+          console.log('tablasssssxpro',this.tablas)
+      }
       },
       error => {
         console.log(<any>error);
@@ -50,57 +60,47 @@ export class AprobarHorasComponent implements OnInit {
     )
   }
 
-  consultar() {
-    this.projectosService.consultar(this.idproyecto).subscribe(
-      response => {
-        this.usuarios2 = response;
-        if (this.usuarios2 == null) {
-        } else {
-          this.usuarios2 = response;
-        }
-      },
-      error => {
-        console.log(<any>error);
-      }
-    )
-  }
+  
 
-  aprobar(id) {
+  aprobar(id)
+  {
     GeneralService.ABRIR_CONFIRMACION().subscribe(
-      response => {
+  		response => {
         this.aprobacionService.aprobar_admin(id).subscribe(
           response => {
             GeneralService.ABRIR_MENSAJE("Aprobacion completada", "success");
-            this.consultar();
+            this.tablas_uni();
           },
           error => {
             console.log(<any>error);
           }
         );
-      },
-      error => {
-        console.log(<any>error);
-      }
+  		},
+  		error => {
+  			console.log(<any>error);
+  		}
     );
   }
 
-  desaprobar(id) {
+  desaprobar(id)
+  {
     GeneralService.ABRIR_CONFIRMACION().subscribe(
-      response => {
+  		response => {
         this.aprobacionService.desaprobar_admin(id).subscribe(
           response => {
             GeneralService.ABRIR_MENSAJE("Desaprobacion completada", "success");
-            this.consultar();
+            this.tablas_uni();
           },
           error => {
             console.log(<any>error);
           }
         );
-      },
-      error => {
-        console.log(<any>error);
-      }
+  		},
+  		error => {
+  			console.log(<any>error);
+  		}
     );
   }
+
 
 }

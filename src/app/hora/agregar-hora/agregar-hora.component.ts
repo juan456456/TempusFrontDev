@@ -134,6 +134,7 @@ public prodetailid;
         this.actividades = this.actividades.concat(res);
         this.listarActividadesJefatura(1, this.jefatura, this.proyecto).subscribe(res => {
           this.actividades = this.actividades.concat(res);
+          console.log(this.actividades)
         });
       });
     });

@@ -32,6 +32,12 @@ export class AprobacionService {
   	return this.http.get(this.url + 'consultar' + '/'+ id, {headers : headers}); 
   }
 
+  consultarProyectos(id) 
+  {
+    const headers = new HttpHeaders(  ('application/json'));
+  	return this.http.get(this.url + 'consultarproyectos' + '/'+ id, {headers : headers}); 
+  }
+
   aprobar_admin(id){
     const headers = new HttpHeaders(  ('application/json'));
   	return this.http.delete(this.url + 'ok' + '/'+ id, {headers : headers}); 

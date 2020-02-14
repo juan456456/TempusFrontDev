@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralService } from 'src/services/general.service';
 import { AprobacionService } from "src/services/aprobacion.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { RegHoraService } from '../../../services/reghora.service';
+
+
 
 
 @Component({
@@ -11,7 +16,12 @@ import { AprobacionService } from "src/services/aprobacion.service";
 export class AprobarHorasAdminComponent implements OnInit {
 
   constructor(
+    private RegHoraService: RegHoraService,
     private aprobacionService: AprobacionService,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+
+
      ) { }
 
      public usuarios: any = [];
@@ -21,11 +31,18 @@ export class AprobarHorasAdminComponent implements OnInit {
     public id : any;
     p: number = 1;
     public idcolaborador :any;
+    public formulario : FormGroup;
+
 
   ngOnInit() {
     this.data = JSON.parse(localStorage.getItem("logindata"));
     this.id = this.data.idusu;
     this.listar();
+     //Form validator
+    this.formulario = this.formBuilder.group({
+      Mrechazo: ['', Validators.required],
+    });
+  
   }
 
   listar() {
@@ -45,12 +62,12 @@ export class AprobarHorasAdminComponent implements OnInit {
   }
   
   tablas_uni(){
-    this.aprobacionService.tablasuni(this.idcolaborador)
+    this.aprobacionService.consultar(this.idcolaborador)
     .subscribe(
       response => {
         if (response != null) {
           this.tablas = response;
-          console.log(this.tablas)
+          console.log('tablasssss',this.tablas)
       }
       },
       error => {
@@ -101,5 +118,22 @@ export class AprobarHorasAdminComponent implements OnInit {
     );
   }
 
+  editar(idreghoras)
+  {
+    let data = {
+      'idreghoras' : idreghoras,
+      'Mrechazo' : this.formulario.value.Mrechazo
+    };
+   
+    console.log(data);
+    this.RegHoraService.actualizar(data).subscribe(
+      response => {
+        GeneralService.ABRIR_MENSAJE("Desaprobacion completada", "success");
+        this.tablas_uni();
+      },
+      error => {
+        console.log(<any>error);
+      }
+    )}
  
 }

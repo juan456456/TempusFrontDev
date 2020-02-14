@@ -52,32 +52,59 @@
                 <tr>
                     <th>Actividad</th>
                     <th>Actividad Sec</th>
+                    <th>Tipo Registro</th>
                     <th>Fecha ini</th>
                     <th>Fecha fin</th>
                     <th>Cantidad de horas</th>
-                    <th>Estado</th>
-                    <th>Accion</th>
+                    <th>Estado de Horas</th>
+                    <th>Aprobar Horas</th>
+                    <th>Rechazar Horas</th>
                 </tr>
                 <tr *ngFor="let usuario2 of tablas| paginate: { itemsPerPage: 10, currentPage: p}">
 
-                    <td *ngIf="usuario2.tiporeg == 3">{{usuario2.descripcion}}</td>
-                    <td *ngIf="usuario2.tiporeg != 3">{{usuario2.Act_Nombre}}</td>
-                    <td *ngIf="usuario2.tiporeg == 3">{{usuario2.descripcion}}</td>
-                    <td *ngIf="usuario2.tiporeg != 3">{{usuario2.actsec}}</td>              
+                    <td>{{usuario2.Act_Nombre}}</td>
+                    <td>{{usuario2.actsec}}</td>
+                    <td *ngIf="usuario2.tiporeg == 2">Administrativas</td>
+                    <td *ngIf="usuario2.tiporeg == 3">Novedades</td>
                     <td>{{usuario2.fechaini}}</td>
                     <td>{{usuario2.fechafin}}</td>
                     <td>{{usuario2.canthoras}}</td>
                     <td *ngIf="usuario2.autorizado == 0">No aprobado</td>
                     <td *ngIf="usuario2.autorizado == 1">Aprobado</td>
+                    <td *ngIf="usuario2.autorizado == 2">Pendiente</td>
 
-                    <td *ngIf="usuario2.autorizado == 0"><button title="Aprobar" (click)="aprobar(usuario2.idreghoras)" class="uk-button uk-button-primary">
+                    <td><button title="Aprobar" (click)="aprobar(usuario2.idreghoras)" class="uk-button uk-button-primary">
                         <i class="fas fa-check"></i>
                         </button>
                     </td>
-                    <td *ngIf="usuario2.autorizado == 1"><button title="Desaprobar" (click)="desaprobar(usuario2.idreghoras)" class="uk-button uk-button-danger"><i class="fas fa-times"></i></button></td>
+                    <td><button uk-toggle="target: #my-id" title="Rechazar" class="uk-button uk-button-danger"><i class="fas fa-times"></i></button></td>
+                    <div id="my-id" uk-modal>
+                        <div class="uk-modal-dialog">
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                            <div class="uk-modal-header">
+                                <h2 class="uk-modal-title">Motivo de Rechazo de horas</h2>
+                            </div>
+                            <div class="uk-modal-body">
+                                <form class="uk-margin" [formGroup]="formulario" (ngSubmit)="editar()">
+                                    <div class="uk-margin">
+                                        <textarea class="uk-textarea" rows="5" placeholder="Describe aquí el motivo del rechazo de la solicitud." formControlName="Mrechazo"></textarea>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="uk-modal-footer uk-text-center">
+                                <button type="submit" (click)="editar(usuario2.idreghoras)" class="uk-button uk-button-primary uk-modal-close" [disabled]="!formulario.valid">Confirmar</button>
+                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </tr>
+
+                <!-- This is the modal -->
+
             </tbody>
         </table>
-        <pagination-controls (pageChange)="p = $event" ></pagination-controls>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
 </div>
