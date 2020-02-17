@@ -30,6 +30,11 @@
             <select class=" uk-width uk-select uk-form-width-large" [(ngModel)]="idcolaborador" (ngModelChange)="tablas_uni()">
                 <option *ngFor="let usuario of usuarios" value="{{usuario.idusu}}">{{usuario.nombre}}</option>
             </select>
+            <br>
+            <div class="botonexp" *ngIf="tablas != 0">
+                <button class="uk-button uk-button-primary" style="text-align:center" (click)="exportarContratistas()"><i
+              class="far fa-file-excel"></i></button>
+            </div>
         </div>
     </div>
 
@@ -47,6 +52,8 @@
     </div>
 
     <div class="uk-overflow-auto" style="padding: 30px" *ngIf="tablas != 0">
+
+
         <table class="uk-table uk-table-small uk-table-divider">
             <tbody>
                 <tr>

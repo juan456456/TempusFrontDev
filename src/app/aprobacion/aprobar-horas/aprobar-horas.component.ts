@@ -12,6 +12,8 @@ export class AprobarHorasComponent implements OnInit {
 
   constructor(
     private aprobacionService: AprobacionService,
+    private generalService: GeneralService,
+
      ) { }
 
      public usuarios: any = [];
@@ -58,6 +60,38 @@ export class AprobarHorasComponent implements OnInit {
         console.log(<any>error);
       }
     )
+  }
+
+  exportarContratistas() {
+    let json: any = [];
+    let x = 0;
+    this.tablas.forEach(element => {
+      let data: any = {};
+      data['Actividad'] = element.Act_Nombre;
+      data['Actividad Sec'] = element.actsec;
+      if (element.tiporeg == 1) {
+        data['Tipo Registro'] = "Proyecto";
+      } else {
+        data['Tipo Registro'] = "Proyecto";
+      }
+      data['Fecha Ini'] = element.fechaini;
+      data['Fecha Fin'] = element.fechafin;
+      data['Cantidad Horas'] = element.canthoras;
+      if (element.autorizado == 0) {
+        data['Estado de Horas'] = "No apobado";
+      }else{
+        if (element.autorizado == 1){
+          data['Estado de Horas'] = "Apobado";
+        }else{
+          data['Estado de Horas'] = "Pendietes";
+        }
+      }
+      
+      json[x] = data;
+      x++;
+    });
+    json = <JSON>json;
+    this.generalService.exportAsExcelFile(json);
   }
 
   
