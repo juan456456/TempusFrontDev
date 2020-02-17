@@ -39,6 +39,9 @@ export class HoraComponent implements OnInit {
   public pro = [];
   public events = [];
   public eventsN = [];
+  public autorizado : any;
+  public Mrechazo : any;
+
 
 
   /**
@@ -115,19 +118,11 @@ export class HoraComponent implements OnInit {
 
 
   selectEvent(event) {
-    console.log(event);
     var fechainicial = event.event.start;
     var fechafinal = event.event.end;
-    console.log(fechainicial);
-    console.log(fechafinal);
 
     var fechaini = this.datePipe.transform(fechainicial,'yyyy-MM-dd HH:mm' );
     var fechafin = this.datePipe.transform(fechafinal,'yyyy-MM-dd HH:mm' );
-
-    console.log(fechaini);
-    console.log(fechafin);
-  
-  
 
     let login = JSON.parse(localStorage.getItem("logindata"));
     let data = {
@@ -136,28 +131,58 @@ export class HoraComponent implements OnInit {
       'fechafin': fechafin
     };
 
+    this.reghoraService.motivorechazo(data).subscribe(
+      response =>{
+        response.forEach(element => {
+          this.autorizado = element.autorizado;
+          this.Mrechazo = 'Motivo de rechazo: ' + element.Mrechazo;
+          console.log(this.autorizado);
+          console.log(this.Mrechazo);
 
-    GeneralService.ABRIR_CONFIRMACION().subscribe(
-  		response => {
-        this.reghoraService.eliminar(data).subscribe(
-          response => {
-            if(response != null) {
-               GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "success");
-               window.location.reload();
-            }
-      },
-  		error => {
-  			console.log(<any>error);
-  		}
-    );
-  }
-   )
+
+          if( this.autorizado == 0)
+          {
+            GeneralService.MOTIVO_RECHAZO(this.Mrechazo).subscribe(
+              response => {
+                this.reghoraService.eliminar(data).subscribe(
+                  response => {
+                    if(response != null) {
+                       GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "success");
+                       window.location.reload();
+                    }
+              },
+              error => {
+                console.log(<any>error);
+              }
+            );
+          })
+
+          }else
+          {
+            
+            GeneralService.ABRIR_CONFIRMACION().subscribe(
+              response => {
+                this.reghoraService.eliminar(data).subscribe(
+                  response => {
+                    if(response != null) {
+                       GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "success");
+                       window.location.reload();
+                    }
+              },
+              error => {
+                console.log(<any>error);
+              })});
+          }
+        });
+      }
+    )
   };
+  
     onChangeSearch(val: string) {}
     onFocused(e){}
 
     selectEventos(eventsN) {
-      console.log(eventsN);
+      console.log('datozzzzzs',eventsN);
       var fechainicial = eventsN.event.start;
       var fechafinal = eventsN.event.end;
       console.log(fechainicial);
@@ -188,22 +213,50 @@ export class HoraComponent implements OnInit {
   
   
   
-      GeneralService.ABRIR_CONFIRMACION().subscribe(
-        response => {
-          this.reghoraService.eliminar(data).subscribe(
-            response => {
-              if(response != null) {
-                 GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "success");
-                 window.location.reload();
-              }
-        },
-        error => {
-          console.log(<any>error);
+      this.reghoraService.motivorechazo(data).subscribe(
+        response =>{
+          response.forEach(element => {
+            this.autorizado = element.autorizado;
+            this.Mrechazo = 'Motivo de rechazo: ' + element.Mrechazo;
+            console.log(this.autorizado);
+            console.log(this.Mrechazo);
+  
+  
+            if( this.autorizado == 0)
+            {
+              GeneralService.MOTIVO_RECHAZO(this.Mrechazo).subscribe(
+                response => {
+                  this.reghoraService.eliminar(data).subscribe(
+                    response => {
+                      if(response != null) {
+                         GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "success");
+                         window.location.reload();
+                      }
+                },
+                error => {
+                  console.log(<any>error);
+                }
+              );
+            })
+  
+            }else
+            {
+              
+              GeneralService.ABRIR_CONFIRMACION().subscribe(
+                response => {
+                  this.reghoraService.eliminar(data).subscribe(
+                    response => {
+                      if(response != null) {
+                         GeneralService.ABRIR_MENSAJE("Eliminado correctamente", "success");
+                         window.location.reload();
+                      }
+                },
+                error => {
+                  console.log(<any>error);
+                })});
+            }
+          });
         }
-       );
-    }
-     )
-
-     };
-
+      )
+    };
 }

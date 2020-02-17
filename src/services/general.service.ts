@@ -114,6 +114,26 @@ export class GeneralService {
     );
   }
 
+  public static MOTIVO_RECHAZO(msg): any {
+    const observable = new Observable(observer => {
+      Swal.fire({
+        title: '¿Eliminar registro?',
+        text: msg,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: '¡Cancelar!',
+        confirmButtonText: '¡Confirmar!'
+      }).then((result) => {
+        if (result.value) {
+          observer.next(true);
+        }
+      });
+    });
+    return observable;
+  }
+
 
   // Spinner
 

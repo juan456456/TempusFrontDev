@@ -38,6 +38,12 @@ export class RegHoraService {
     return this.http.post(this.url + 'insertar', data, {headers : headers}); 
   }
 
+  motivorechazo(data) : any
+  {
+    const headers = new HttpHeaders(  ('application/json'));
+    return this.http.post(this.url + 'listarmotivorechazo', data, {headers : headers}); 
+  }
+
   eliminar(data) : any
   {
     const headers = new HttpHeaders(  ('application/json'));
