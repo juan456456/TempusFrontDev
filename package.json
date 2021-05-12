@@ -29,7 +29,7 @@
     "@fullcalendar/timegrid": "^4.3.0",
     "@kolkov/angular-editor": "^0.14.7",
     "angular-ng-autocomplete": "^1.1.15",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "core-js": "^2.6.11",
     "dateformat": "^3.0.3",
     "file-saver": "^2.0.2",
